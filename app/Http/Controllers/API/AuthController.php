@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\TracerStudy;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -21,10 +22,11 @@ class AuthController extends Controller
                 'nim' => $request->nim,
                 'password' => Hash::make($request->password)
             ]);
-    
+       
             $token = $user->createToken('token')->plainTextToken;
     
             $response = [
+                'messege' => 'User Registed',
                 'user' => $user,
                 'token' => $token
             ];

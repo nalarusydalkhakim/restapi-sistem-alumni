@@ -21,7 +21,6 @@ class CreateTracerStudiesTable extends Migration
             $table->string('company_sector')->nullable();
             $table->string('position')->nullable();
             $table->string('contract_status')->nullable();
-            $table->string('label')->nullable();
             $table->integer('salary')->nullable();
             $table->boolean('job_matches')->nullable();
             $table->string('start_working')->nullable();
