@@ -8,25 +8,10 @@ use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    
-    public function store(Request $request)
-    {
-        //
-    }
-
     /**
      * Display the specified resource.
      *
@@ -53,6 +38,30 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|string',
+            'email' => 'required|string|email',
+            'nik' => 'required|string',
+            'nim' => 'required|string',
+            'faculty' => 'required|string',
+            'departement' => 'required|string',
+            'entry_year' => 'required',
+            'graduate_year' => 'required',
+            'birth_date' => 'required',
+            'birth_place' => 'required|string',
+            'gender' => 'required|string',
+            'address' => 'required|string',
+            'phone_number' => 'required|string',
+            'social_media' => 'required|string',
+            'gpa' => 'required',
+            'diploma_number' => 'required|string',
+        ]);
+
+        // run validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        
         $user = User::findOrFail($id);
         try {
             $user->update([
@@ -69,8 +78,15 @@ class ProfileController extends Controller
                 'gender' => $request->gender,
                 'address' => $request->address,
                 'phone_number' => $request->phone_number,
-                'label' => $request->label,
+                'social_media' => $request->social_media,
+                'gpa' => $request->gpa, //its called ipk in indo :)
+                'diploma_number' => $request->diploma_number,
+                'organization' => $request->organization,
+                'achievement' => $request->achievement,
+                'first' => 0,
+                'completed' => 1,
             ]);
+
             $response = [
                 'messege' => 'User Profile Updated',
                 'user' => $user

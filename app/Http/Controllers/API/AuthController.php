@@ -8,14 +8,28 @@ use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
     public function Register(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|string',
+            'email' => 'required|string|unique:users|email',
+            'nik' => 'required|string|unique:users',
+            'nim' => 'required|string|unique:users',
+            'password' => 'required|min:8'
+        ]);
+
+        // run validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         try {
-            $user = User::create([
+            $user = User::create([  
                 'name' => $request->name,
                 'email' => $request->email,
                 'nik' => $request->nik,
@@ -41,6 +55,16 @@ class AuthController extends Controller
 
     public function Login(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'username' => 'required',
+            'password' => 'required|min:8'
+        ]);
+
+        // run validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         $user = User::where('email', $request->username)->orWhere('nik', $request->username)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
@@ -62,6 +86,16 @@ class AuthController extends Controller
 
     public function change_password(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'password' => 'required|min:8',
+            'new_password' => 'required|min:8'
+        ]);
+
+        // run validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         $user = User::findOrFail($request->id);
 
         if (!$user || !Hash::check($request->password, $user->password)) {

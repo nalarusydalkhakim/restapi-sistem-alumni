@@ -1,10 +1,18 @@
 <?php
 
+// use App\Http\Controllers\API\Admin\AlumniController;
+// use App\Http\Controllers\API\Alumni\AuthController;
+// use App\Http\Controllers\API\Alumni\TracerStudyController;
+// use App\Http\Controllers\API\Alumni\ProfileController;
+// use App\Http\Controllers\API\Alumni\CVCOntroller;
+
 use App\Http\Controllers\API\AlumniController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CVCOntroller;
 use App\Http\Controllers\API\ProfileController;
+use App\Http\Controllers\API\TracerEntrepreneurController;
 use App\Http\Controllers\API\TracerStudyController;
+use App\Http\Controllers\API\TracerWorkController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,9 +38,17 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/profile/{id}', [ProfileController::class, 'show']);
 Route::put('/profile/{id}', [ProfileController::class, 'update']);
 // Tracer Study Endpoint
-Route::post('/tracer', [TracerStudyController::class, 'store']);
-Route::get('/tracer/{id}', [TracerStudyController::class, 'show']);
-Route::put('/tracer/{id}', [TracerStudyController::class, 'update']);
+Route::post('/tracer_s', [TracerStudyController::class, 'store']);
+Route::get('/tracer_s/{id}', [TracerStudyController::class, 'show']);
+Route::put('/tracer_s/{id}', [TracerStudyController::class, 'update']);
+// Tracer Work Endpoint
+Route::post('/tracer_w', [TracerWorkController::class, 'store']);
+Route::get('/tracer_w/{id}', [TracerWorkController::class, 'show']);
+Route::put('/tracer_w/{id}', [TracerWorkController::class, 'update']);
+// Tracer Entrepreneur Endpoint
+Route::post('/tracer_e', [TracerEntrepreneurController::class, 'store']);
+Route::get('/tracer_e/{id}', [TracerEntrepreneurController::class, 'show']);
+Route::put('/tracer_e/{id}', [TracerEntrepreneurController::class, 'update']);
 // Generate CV for Alumni
 Route::get('/cv/{id}', [CVCOntroller::class, 'show']);
 

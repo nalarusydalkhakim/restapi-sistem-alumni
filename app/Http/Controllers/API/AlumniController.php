@@ -50,7 +50,11 @@ class AlumniController extends Controller
                 'gender' => $request->gender,
                 'address' => $request->address,
                 'phone_number' => $request->phone_number,
-                'label' => $request->label,
+                'social_media' => $request->social_media,
+                'gpa' => $request->gpa, //its called ipk in indo :)
+                'diploma_number' => $request->diploma_number,
+                'organization' => $request->prganization,
+                'achievement' => $request->achievement,
             ]);
     
             $response = [
@@ -108,7 +112,11 @@ class AlumniController extends Controller
                 'gender' => $request->gender,
                 'address' => $request->address,
                 'phone_number' => $request->phone_number,
-                'label' => $request->label,
+                'social_media' => $request->social_media,
+                'gpa' => $request->gpa, //its called ipk in indo :)
+                'diploma_number' => $request->diploma_number,
+                'organization' => $request->prganization,
+                'achievement' => $request->achievement,
             ]);
             $response = [
                 'messege' => 'Alumni Updated',
@@ -125,6 +133,7 @@ class AlumniController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * 
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

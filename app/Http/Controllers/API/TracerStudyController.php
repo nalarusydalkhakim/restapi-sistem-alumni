@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TracerStudy;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TracerStudyController extends Controller
 {
@@ -59,10 +60,34 @@ class TracerStudyController extends Controller
      */
     public function update(Request $request, $user_id)
     {
+        $validator = Validator::make($request->all(),[
+            'university_name' => 'required|string',
+            'university_address' => 'required|string',
+            'study_location' => 'required|string',
+            'departement' => 'required|string',
+            'entry_year' => 'required',
+            'graduate_year' => 'required',
+            'study_matches' => 'required',
+        ]);
+
+        // run validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        
         $tracer_study = TracerStudy::where('user_id',$user_id)->firstOrFail();
 
         try {
-            $tracer_study->update($request->all());
+            $tracer_study->update([
+                'university_name' => $request->university_name,
+                'university_address' => $request->university_address,
+                'study_location' => $request->study_location,
+                'departement' => $request->departement,
+                'entry_year' => $request->entry_year,
+                'graduate_year' => $request->graduate_year,
+                'study_matches' => $request->study_matches,
+                'completed' => 1
+            ]);
 
             $response = [
                 'messege' => 'Tracer Study Updated',

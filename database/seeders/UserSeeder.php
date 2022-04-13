@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'Alumni Pertama',
             'email' => 'alumni@domain.com',
             'nik' => '28051999',
+            'nim' => '17520241021',
             'password' => Hash::make('12345678'),
         ]);
     }

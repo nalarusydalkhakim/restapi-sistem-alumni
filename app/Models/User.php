@@ -32,10 +32,14 @@ class User extends Authenticatable
         'gender',
         'address',
         'phone_number',
-        'label',
+        'social_media',
+        'gpa', //its called ipk in indo :)
+        'diploma_number',
+        'organization',
+        'achievement',
         'first',
+        'validated',
         'completed',
-        'active',
     ];
 
     /**

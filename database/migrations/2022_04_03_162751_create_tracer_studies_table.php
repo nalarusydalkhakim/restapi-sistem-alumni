@@ -16,15 +16,13 @@ class CreateTracerStudiesTable extends Migration
         Schema::create('tracer_studies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->string('company_name')->nullable();
-            $table->string('company_address')->nullable();
-            $table->string('company_sector')->nullable();
-            $table->string('position')->nullable();
-            $table->string('contract_status')->nullable();
-            $table->integer('salary')->nullable();
-            $table->boolean('job_matches')->nullable();
-            $table->string('start_working')->nullable();
-            $table->string('get_job_from')->nullable();
+            $table->string('university_name')->nullable();
+            $table->string('university_address')->nullable();
+            $table->enum('study_location',['dalam negeri', 'luar negeri'])->nullable();
+            $table->string('departement')->nullable();
+            $table->year('entry_year')->nullable();
+            $table->year('graduate_year')->nullable();
+            $table->boolean('study_matches')->nullable();
             $table->boolean('completed')->default(false);
             $table->timestamps();
         });

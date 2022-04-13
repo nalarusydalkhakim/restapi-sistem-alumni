@@ -16,16 +16,13 @@ class TracerStudy extends Model
      */
     protected $fillable = [
         'user_id',
-        'company_name',
-        'company_address',
-        'company_sector',
-        'position',
-        'contract_status',
-        'label',
-        'salary',
-        'job_matches',
-        'start_working',
-        'get_job_from',
+        'university_name',
+        'university_address',
+        'study_location',
+        'departement',
+        'entry_year',
+        'graduate_year',
+        'study_matches',
         'completed',
     ];
 }
