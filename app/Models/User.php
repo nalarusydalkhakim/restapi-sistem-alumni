@@ -38,8 +38,11 @@ class User extends Authenticatable
         'organization',
         'achievement',
         'photo', 
+        'photo_url',
         'identity_card', //ktp
+        'identity_card_url',
         'bachelor_certificate', //ijazah
+        'bachelor_certificate_url',
         'first',
         'validated',
         'completed',

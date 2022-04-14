@@ -106,17 +106,17 @@ class ProfileController extends Controller
                 'organization' => $request->organization,
                 'achievement' => $request->achievement,
                 'photo' => $request->photo,
+                'photo_url' => asset('storage/'.$request->photo),
                 'identity_card' => $request->identity_card,
+                'identity_card_url' => asset('storage/'.$request->identity_card),
                 'bachelor_certificate' => $request->bachelor_certificate,
+                'bachelor_certificate_url' => asset('storage/'.$request->bachelor_certificate),
                 'first' => 0,
                 'completed' => 1,
             ]);
 
             $response = [
                 'messege' => 'User Profile Updated',
-                'photo_url' => asset('storage/'.$request->photo),
-                'identity_card_url' => asset('storage/'.$request->identity_card),
-                'bachelor_certificate_url' => asset('storage/'.$request->bachelor_certificate),
                 'user' => $user
             ];
     

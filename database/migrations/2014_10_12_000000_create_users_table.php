@@ -34,8 +34,11 @@ class CreateUsersTable extends Migration
             $table->string('organization')->nullable();
             $table->string('achievement')->nullable();
             $table->string('photo')->nullable();
+            $table->string('photo_url')->nullable();
             $table->string('identity_card')->nullable();
+            $table->string('identity_card_url')->nullable();
             $table->string('bachelor_certificate')->nullable();
+            $table->string('bachelor_certificate_url')->nullable();
             $table->boolean('first')->default(true);
             $table->boolean('completed')->default(false);
             $table->boolean('validated')->nullable();
