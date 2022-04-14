@@ -166,6 +166,47 @@ class AlumniController extends Controller
         }
     }
 
+
+    // Validation Alumni by Admin
+    public function setValidate($id)
+    {
+        $user = User::findOrFail($id);
+        try {
+            $user->update([
+                'validated' => 1
+            ]);
+            $response = [
+                'messege' => 'Alumni Validated'
+            ];
+    
+            return response($response, 201);
+        } catch (QueryException $e) {
+            return response()->json([
+                'messege' => 'Failed '.$e->errorInfo
+            ]);
+        }
+    }
+
+    public function unValidate($id)
+    {
+        $user = User::findOrFail($id);
+        try {
+            $user->update([
+                'validated' => 0
+            ]);
+            $response = [
+                'messege' => 'Alumni Unvalidated'
+            ];
+    
+            return response($response, 201);
+        } catch (QueryException $e) {
+            return response()->json([
+                'messege' => 'Failed '.$e->errorInfo
+            ]);
+        }
+    }
+
+
     /**
      * Remove the specified resource from storage.
      * 
