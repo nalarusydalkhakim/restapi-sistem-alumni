@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
@@ -55,15 +54,38 @@ class ProfileController extends Controller
             'social_media' => 'required|string',
             'gpa' => 'required',
             'diploma_number' => 'required|string',
+            'photo' => 'image:jpeg,png,jpg|max:5120',
+            'identity_card' => 'image:jpeg,png,jpg|max:5120',
+            'bachelor_certificate' => 'image:jpeg,png,jpg|max:5120'
         ]);
 
         // run validation
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
+        if ($request->file('photo')) {
+            $photo_name = time().$request->file('photo')->getClientOriginalName();
+            $photo_path = $request->file('photo')->storeAs('uploads/foto',$photo_name);
+            $request->photo = $photo_path;
+        }
+
+        if ($request->file('identity_card')) {
+            $identity_card_name = time().$request->file('identity_card')->getClientOriginalName();
+            $identity_card_path = $request->file('identity_card')->storeAs('uploads/ktp',$identity_card_name);
+            $request->identity_card = $identity_card_path;
+        }
+
+        if ($request->file('bachelor_certificate')) {
+            $bachelor_certificate_name = time().$request->file('bachelor_certificate')->getClientOriginalName();
+            $bachelor_certificate_path = $request->file('bachelor_certificate')->storeAs('uploads/ijazah',$bachelor_certificate_name);
+            $request->bachelor_certificate = $bachelor_certificate_path;
+        }
         
         $user = User::findOrFail($id);
+
         try {
+            
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -83,12 +105,18 @@ class ProfileController extends Controller
                 'diploma_number' => $request->diploma_number,
                 'organization' => $request->organization,
                 'achievement' => $request->achievement,
+                'photo' => $request->photo,
+                'identity_card' => $request->identity_card,
+                'bachelor_certificate' => $request->bachelor_certificate,
                 'first' => 0,
                 'completed' => 1,
             ]);
 
             $response = [
                 'messege' => 'User Profile Updated',
+                'photo_url' => asset('storage/'.$request->photo),
+                'identity_card_url' => asset('storage/'.$request->identity_card),
+                'bachelor_certificate_url' => asset('storage/'.$request->bachelor_certificate),
                 'user' => $user
             ];
     

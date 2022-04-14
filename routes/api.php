@@ -37,6 +37,7 @@ Route::get('/logout', [AuthController::class, 'logout']);
 // User Profile Endpoint
 Route::get('/profile/{id}', [ProfileController::class, 'show']);
 Route::put('/profile/{id}', [ProfileController::class, 'update']);
+Route::post('/profile/{id}', [ProfileController::class, 'update']);
 // Tracer Study Endpoint
 Route::post('/tracer_s', [TracerStudyController::class, 'store']);
 Route::get('/tracer_s/{id}', [TracerStudyController::class, 'show']);
@@ -59,6 +60,7 @@ Route::post('/alumni', [AlumniController::class, 'store']);
 Route::get('/alumni/{id}', [AlumniController::class, 'show']);
 Route::put('/alumni/{id}', [AlumniController::class, 'update']);
 Route::delete('/alumni/{id}', [AlumniController::class, 'destroy']);
+
 
 
 // protected routes

@@ -57,6 +57,7 @@
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                     Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.
                                 </div>
+                                <img src="http://127.0.0.1:8000/storage/uploads/foto/1649958999kartu_alumni_white_bg.jpg" alt="">
                             </div>
                         </div>
 

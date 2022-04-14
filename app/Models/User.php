@@ -37,6 +37,9 @@ class User extends Authenticatable
         'diploma_number',
         'organization',
         'achievement',
+        'photo', 
+        'identity_card', //ktp
+        'bachelor_certificate', //ijazah
         'first',
         'validated',
         'completed',

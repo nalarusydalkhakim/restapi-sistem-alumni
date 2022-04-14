@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AlumniController extends Controller
 {
@@ -34,6 +35,33 @@ class AlumniController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|string',
+            'email' => 'required|string|email',
+            'nik' => 'required|string',
+            'nim' => 'required|string',
+            'faculty' => 'required|string',
+            'departement' => 'required|string',
+            'entry_year' => 'required',
+            'graduate_year' => 'required',
+            'birth_date' => 'required',
+            'birth_place' => 'required|string',
+            'gender' => 'required|string',
+            'address' => 'required|string',
+            'phone_number' => 'required|string',
+            'social_media' => 'required|string',
+            'gpa' => 'required',
+            'diploma_number' => 'required|string',
+            // 'photo' => 'image:jpeg,png,jpg|max:2048',
+            // 'identity_card' => 'image:jpeg,png,jpg|max:2048',
+            // 'bachelor_certificate' => 'image:jpeg,png,jpg|max:2048'
+        ]);
+
+        // run validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        
         try {
             $user = User::create([
                 'name' => $request->name,
@@ -96,6 +124,33 @@ class AlumniController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|string',
+            'email' => 'required|string|email',
+            'nik' => 'required|string',
+            'nim' => 'required|string',
+            'faculty' => 'required|string',
+            'departement' => 'required|string',
+            'entry_year' => 'required',
+            'graduate_year' => 'required',
+            'birth_date' => 'required',
+            'birth_place' => 'required|string',
+            'gender' => 'required|string',
+            'address' => 'required|string',
+            'phone_number' => 'required|string',
+            'social_media' => 'required|string',
+            'gpa' => 'required',
+            'diploma_number' => 'required|string',
+            // 'photo' => 'image:jpeg,png,jpg|max:2048',
+            // 'identity_card' => 'image:jpeg,png,jpg|max:2048',
+            // 'bachelor_certificate' => 'image:jpeg,png,jpg|max:2048'
+        ]);
+
+        // run validation
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        
         $user = User::findOrFail($id);
         try {
             $user->update([
