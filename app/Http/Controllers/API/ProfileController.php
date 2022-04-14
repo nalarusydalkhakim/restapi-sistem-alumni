@@ -65,20 +65,17 @@ class ProfileController extends Controller
         }
 
         if ($request->file('photo')) {
-            $photo_name = time().$request->file('photo')->getClientOriginalName();
-            $photo_path = $request->file('photo')->storeAs('uploads/foto',$photo_name);
+            $photo_path = $request->file('photo')->store('uploads/foto');
             $request->photo = $photo_path;
         }
 
         if ($request->file('identity_card')) {
-            $identity_card_name = time().$request->file('identity_card')->getClientOriginalName();
-            $identity_card_path = $request->file('identity_card')->storeAs('uploads/ktp',$identity_card_name);
+            $identity_card_path = $request->file('identity_card')->store('uploads/ktp');
             $request->identity_card = $identity_card_path;
         }
 
         if ($request->file('bachelor_certificate')) {
-            $bachelor_certificate_name = time().$request->file('bachelor_certificate')->getClientOriginalName();
-            $bachelor_certificate_path = $request->file('bachelor_certificate')->storeAs('uploads/ijazah',$bachelor_certificate_name);
+            $bachelor_certificate_path = $request->file('bachelor_certificate')->store('uploads/ijazah');
             $request->bachelor_certificate = $bachelor_certificate_path;
         }
         
