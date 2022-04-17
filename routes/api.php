@@ -60,6 +60,7 @@ Route::post('/alumni', [AlumniController::class, 'store']);
 Route::get('/alumni/{id}', [AlumniController::class, 'show']);
 Route::put('/alumni/{id}', [AlumniController::class, 'update']);
 Route::delete('/alumni/{id}', [AlumniController::class, 'destroy']);
+// validate alumni by admin endpoint
 Route::put('/validate/{id}', [AlumniController::class, 'setValidate']);
 Route::put('/unvalidate/{id}', [AlumniController::class, 'unValidate']);
 

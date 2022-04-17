@@ -54,9 +54,9 @@ class ProfileController extends Controller
             'social_media' => 'required|string',
             'gpa' => 'required',
             'diploma_number' => 'required|string',
-            'photo' => 'image:jpeg,png,jpg|max:5120',
-            'identity_card' => 'image:jpeg,png,jpg|max:5120',
-            'bachelor_certificate' => 'image:jpeg,png,jpg|max:5120'
+            // 'photo' => 'image:jpeg,png,jpg|max:5120',
+            // 'identity_card' => 'image:jpeg,png,jpg|max:5120',
+            // 'bachelor_certificate' => 'image:jpeg,png,jpg|max:5120'
         ]);
 
         // run validation
