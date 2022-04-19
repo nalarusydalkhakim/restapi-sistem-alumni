@@ -15,7 +15,7 @@ class CreateTracerEntrepreneursTable extends Migration
     {
         Schema::create('tracer_entrepreneurs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('business_name')->nullable();
             $table->string('business_address')->nullable();
             $table->string('business_sector')->nullable();

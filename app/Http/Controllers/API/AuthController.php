@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\TracerEntrepreneur;
 use App\Models\TracerStudy;
+use App\Models\TracerWork;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -36,12 +38,29 @@ class AuthController extends Controller
                 'nim' => $request->nim,
                 'password' => Hash::make($request->password)
             ]);
-       
+            
+            // Create Tracer on Register
+            $tracer_work = TracerWork::create([
+                'user_id' => $user->id
+            ]);
+
+            $tracer_study = TracerStudy::create([
+                'user_id' => $user->id
+            ]);
+
+            $tracer_entrepreneur = TracerEntrepreneur::create([
+                'user_id' => $user->id
+            ]);
+
+            // Create Token for Authorization
             $token = $user->createToken('token')->plainTextToken;
     
             $response = [
                 'messege' => 'User Registed',
                 'user' => $user,
+                'tracer_work' => $tracer_work,
+                'tracer_study' => $tracer_study,
+                'tracer_entrepreneur' => $tracer_entrepreneur,
                 'token' => $token
             ];
     

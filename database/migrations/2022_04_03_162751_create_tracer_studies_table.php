@@ -15,7 +15,7 @@ class CreateTracerStudiesTable extends Migration
     {
         Schema::create('tracer_studies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('university_name')->nullable();
             $table->string('university_address')->nullable();
             $table->enum('study_location',['dalam negeri', 'luar negeri'])->nullable();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\TracerEntrepreneur;
+use App\Models\TracerUpdateHistory;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -103,9 +104,16 @@ class TracerEntrepreneurController extends Controller
                 'expired_date' => Carbon::now()->addMonths(6)->format('Y-m-d')
             ]);
 
+            $tracer_update_history = TracerUpdateHistory::create([
+                'user_id' => $user_id,
+                'update_date' => Carbon::now()->format('Y-m-d'),
+                'expired_date' => Carbon::now()->addMonths(6)->format('Y-m-d')
+            ]);
+
             $response = [
                 'messege' => 'Tracer Entrepreneur Updated',
-                'tracer_entrepreneur' => $tracer_entrepreneur
+                'tracer_entrepreneur' => $tracer_entrepreneur,
+                'tracer_update_history' => $tracer_update_history
             ];
     
             return response($response, 201);

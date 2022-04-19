@@ -26,4 +26,12 @@ class TracerStudy extends Model
         'completed',
         'expired_date',
     ];
+
+    /**
+     * Get the tracer study associated with the user.
+     */
+    // public function tracerStudy()
+    // {
+    //     return $this->hasOne(TracerStudy::class);
+    // }
 }

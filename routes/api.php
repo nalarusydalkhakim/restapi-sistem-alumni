@@ -10,7 +10,10 @@ use App\Http\Controllers\API\AlumniController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CVCOntroller;
 use App\Http\Controllers\API\DashboardAlumniController;
+use App\Http\Controllers\API\DepartementController;
+use App\Http\Controllers\API\FacultyController;
 use App\Http\Controllers\API\ProfileController;
+use App\Http\Controllers\API\TracerController;
 use App\Http\Controllers\API\TracerEntrepreneurController;
 use App\Http\Controllers\API\TracerStudyController;
 use App\Http\Controllers\API\TracerWorkController;
@@ -41,16 +44,18 @@ Route::get('/dashboard/{id}', [DashboardAlumniController::class, 'showDashboard'
 Route::get('/profile/{id}', [ProfileController::class, 'show']);
 Route::put('/profile/{id}', [ProfileController::class, 'update']);
 Route::post('/profile/{id}', [ProfileController::class, 'update']);
+// All Tracer Endpoint
+Route::get('tracer/{id}', [TracerController::class, 'getUpdateHistory']);
 // Tracer Study Endpoint
-Route::post('/tracer_s', [TracerStudyController::class, 'store']);
+// Route::post('/tracer_s', [TracerStudyController::class, 'store']);
 Route::get('/tracer_s/{id}', [TracerStudyController::class, 'show']);
 Route::put('/tracer_s/{id}', [TracerStudyController::class, 'update']);
 // Tracer Work Endpoint
-Route::post('/tracer_w', [TracerWorkController::class, 'store']);
+// Route::post('/tracer_w', [TracerWorkController::class, 'store']);
 Route::get('/tracer_w/{id}', [TracerWorkController::class, 'show']);
-Route::put('/tracer_w/{id}', [TracerWorkController::class, 'update']);
+Route::post('/tracer_w/{id}', [TracerWorkController::class, 'update']);
 // Tracer Entrepreneur Endpoint
-Route::post('/tracer_e', [TracerEntrepreneurController::class, 'store']);
+// Route::post('/tracer_e', [TracerEntrepreneurController::class, 'store']);
 Route::get('/tracer_e/{id}', [TracerEntrepreneurController::class, 'show']);
 Route::put('/tracer_e/{id}', [TracerEntrepreneurController::class, 'update']);
 // Generate CV for Alumni
@@ -66,6 +71,18 @@ Route::delete('/alumni/{id}', [AlumniController::class, 'destroy']);
 // validate alumni by admin endpoint
 Route::put('/validate/{id}', [AlumniController::class, 'setValidate']);
 Route::put('/unvalidate/{id}', [AlumniController::class, 'unValidate']);
+// Faculty Endpoint
+Route::get('/faculty', [FacultyController::class, 'index']);
+Route::post('/faculty', [FacultyController::class, 'store']);
+Route::get('/faculty/{id}', [FacultyController::class, 'show']);
+Route::put('/faculty/{id}', [FacultyController::class, 'update']);
+Route::delete('/faculty/{id}', [FacultyController::class, 'destroy']);
+// Departement Endpoint
+Route::get('/departement', [DepartementController::class, 'index']);
+Route::post('/departement', [DepartementController::class, 'store']);
+Route::get('/departement/{id}', [DepartementController::class, 'show']);
+Route::put('/departement/{id}', [DepartementController::class, 'update']);
+Route::delete('/departement/{id}', [DepartementController::class, 'destroy']);
 
 
 

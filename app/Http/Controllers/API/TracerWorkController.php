@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\TracerUpdateHistory;
 use App\Models\TracerWork;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -105,9 +106,16 @@ class TracerWorkController extends Controller
                 'expired_date' => Carbon::now()->addMonths(6)->format('Y-m-d')
             ]);
 
+            $tracer_update_history = TracerUpdateHistory::create([
+                'user_id' => $user_id,
+                'update_date' => Carbon::now()->format('Y-m-d'),
+                'expired_date' => Carbon::now()->addMonths(6)->format('Y-m-d')
+            ]);
+
             $response = [
                 'messege' => 'Tracer Work Updated',
-                'tracer_work' => $tracer_work
+                'tracer_work' => $tracer_work,
+                'tracer_update_history' => $tracer_update_history
             ];
     
             return response($response, 201);
