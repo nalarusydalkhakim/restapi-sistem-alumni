@@ -106,6 +106,7 @@ class TracerEntrepreneurController extends Controller
 
             $tracer_update_history = TracerUpdateHistory::create([
                 'user_id' => $user_id,
+                'completed' => 1,
                 'update_date' => Carbon::now()->format('Y-m-d'),
                 'expired_date' => Carbon::now()->addMonths(6)->format('Y-m-d')
             ]);

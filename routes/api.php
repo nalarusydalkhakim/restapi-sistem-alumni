@@ -9,6 +9,7 @@
 use App\Http\Controllers\API\AlumniController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CVCOntroller;
+use App\Http\Controllers\API\DashboardAdminController;
 use App\Http\Controllers\API\DashboardAlumniController;
 use App\Http\Controllers\API\DepartementController;
 use App\Http\Controllers\API\FacultyController;
@@ -62,6 +63,8 @@ Route::put('/tracer_e/{id}', [TracerEntrepreneurController::class, 'update']);
 Route::get('/cv/{id}', [CVCOntroller::class, 'show']);
 
 // For admin site
+// Dashboard Admin
+Route::get('dashboard_admin',[DashboardAdminController::class, 'index']);
 // Alumni Endpoint
 Route::get('/alumni', [AlumniController::class, 'index']);
 Route::post('/alumni', [AlumniController::class, 'store']);

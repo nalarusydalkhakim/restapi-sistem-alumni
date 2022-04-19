@@ -18,6 +18,7 @@ class CreateTracerUpdateHistoriesTable extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->date('update_date')->nullable();
             $table->date('expired_date')->nullable();
+            $table->boolean('completed')->default(false);
         });
     }
 

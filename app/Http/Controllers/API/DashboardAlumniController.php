@@ -49,7 +49,7 @@ class DashboardAlumniController extends Controller
         }
 
         $response = [
-            'messege' => 'Detail of User Profile',
+            'messege' => 'Dashboard Alumni',
             'profile_completed' => $user->completed,
             'tracer_completed' => $tracer_completed,
             'expired_date' => $expired_date
