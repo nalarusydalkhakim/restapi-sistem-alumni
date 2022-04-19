@@ -25,5 +25,6 @@ class TracerEntrepreneur extends Model
         'income',
         'business_matches',
         'completed',
+        'expired_date',
     ];
 }

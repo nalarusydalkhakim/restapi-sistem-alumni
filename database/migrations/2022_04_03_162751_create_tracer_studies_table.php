@@ -24,6 +24,7 @@ class CreateTracerStudiesTable extends Migration
             $table->year('graduate_year')->nullable();
             $table->boolean('study_matches')->nullable();
             $table->boolean('completed')->default(false);
+            $table->date('expired_date')->nullable();
             $table->timestamps();
         });
     }

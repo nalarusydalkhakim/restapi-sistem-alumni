@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TracerWork;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class TracerWorkController extends Controller
@@ -100,7 +101,8 @@ class TracerWorkController extends Controller
                 'job_matches' => $request->job_matches,
                 'start_working' => $request->start_working,
                 'get_job_from' => $request->get_job_from,
-                'completed' => 1
+                'completed' => 1,
+                'expired_date' => Carbon::now()->addMonths(6)->format('Y-m-d')
             ]);
 
             $response = [

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -37,9 +38,9 @@ class AlumniController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required|string',
-            'email' => 'required|string|email',
-            'nik' => 'required|string',
-            'nim' => 'required|string',
+            'email' => 'required|string|unique:users|email',
+            'nik' => 'required|string|unique:users',
+            'nim' => 'required|string|unique:users',
             'birth_date' => 'required',
             'birth_place' => 'required|string',
             'gender' => 'required|string',
@@ -58,7 +59,7 @@ class AlumniController extends Controller
                 'email' => $request->email,
                 'nik' => $request->nik,
                 'nim' => $request->nim,
-                'password' => Hash::make($request->birth_date),
+                'password' => Hash::make(Carbon::createFromFormat('Y-m-d', $request->birth_date)->format('dmY')), //ex. from 1999-05-23 to 23051999
                 'faculty' => $request->faculty,
                 'departement' => $request->departement,
                 'entry_year' => $request->entry_year,

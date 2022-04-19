@@ -25,6 +25,7 @@ class CreateTracerEntrepreneursTable extends Migration
             $table->integer('income')->nullable();
             $table->boolean('business_matches')->nullable();
             $table->boolean('completed')->default(false);
+            $table->date('expired_date')->nullable();
             $table->timestamps();
         });
     }

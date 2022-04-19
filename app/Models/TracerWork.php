@@ -26,5 +26,6 @@ class TracerWork extends Model
         'start_working',
         'get_job_from',
         'completed',
+        'expired_date'
     ];
 }

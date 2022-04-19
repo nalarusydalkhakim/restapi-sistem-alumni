@@ -24,5 +24,6 @@ class TracerStudy extends Model
         'graduate_year',
         'study_matches',
         'completed',
+        'expired_date',
     ];
 }

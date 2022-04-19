@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TracerStudy;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class TracerStudyController extends Controller
@@ -86,7 +87,8 @@ class TracerStudyController extends Controller
                 'entry_year' => $request->entry_year,
                 'graduate_year' => $request->graduate_year,
                 'study_matches' => $request->study_matches,
-                'completed' => 1
+                'completed' => 1,
+                'expired_date' => Carbon::now()->addMonths(6)->format('Y-m-d')
             ]);
 
             $response = [

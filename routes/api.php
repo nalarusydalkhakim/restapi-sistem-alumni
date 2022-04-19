@@ -9,6 +9,7 @@
 use App\Http\Controllers\API\AlumniController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CVCOntroller;
+use App\Http\Controllers\API\DashboardAlumniController;
 use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\API\TracerEntrepreneurController;
 use App\Http\Controllers\API\TracerStudyController;
@@ -34,6 +35,8 @@ Route::post('/register', [AuthController::class, 'register']);
 
 //Its For Alumni User but tami need this on public route :)
 Route::get('/logout', [AuthController::class, 'logout']);
+// Dashboard Alumni
+Route::get('/dashboard/{id}', [DashboardAlumniController::class, 'showDashboard']);
 // User Profile Endpoint
 Route::get('/profile/{id}', [ProfileController::class, 'show']);
 Route::put('/profile/{id}', [ProfileController::class, 'update']);

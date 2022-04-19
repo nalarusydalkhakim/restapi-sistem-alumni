@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TracerEntrepreneur;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class TracerEntrepreneurController extends Controller
@@ -98,7 +99,8 @@ class TracerEntrepreneurController extends Controller
                 'capital_source' => $request->capital_source,
                 'income' => $request->income,
                 'business_matches' => $request->business_matches,
-                'completed' => 1
+                'completed' => 1,
+                'expired_date' => Carbon::now()->addMonths(6)->format('Y-m-d')
             ]);
 
             $response = [

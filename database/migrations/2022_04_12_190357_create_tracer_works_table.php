@@ -26,6 +26,7 @@ class CreateTracerWorksTable extends Migration
             $table->date('start_working')->nullable();
             $table->string('get_job_from')->nullable();
             $table->boolean('completed')->default(false);
+            $table->date('expired_date')->nullable();
             $table->timestamps();
         });
     }
