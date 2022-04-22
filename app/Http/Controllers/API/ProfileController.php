@@ -52,6 +52,8 @@ class ProfileController extends Controller
             'address' => 'required|string',
             'phone_number' => 'required|string',
             'social_media' => 'required|string',
+            'organization' => 'required|string',
+            'achievement' => 'required|string',
             'gpa' => 'required',
             'diploma_number' => 'required|string',
             // 'photo' => 'image:jpeg,png,jpg|max:5120',
