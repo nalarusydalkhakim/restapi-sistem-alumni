@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Concerns\ToModel;
 
 class AlumniController extends Controller
 {
@@ -205,6 +206,17 @@ class AlumniController extends Controller
                 'messege' => 'Failed '.$e->errorInfo
             ]);
         }
+    }
+
+    public function alumniImport(array $row)
+    {
+        return new User([
+            'name'     => $row[0],
+            'email'    => $row[1],
+            'nik'      => $row[2],
+            'nim'      => $row[3],
+            'password' => $row[5]
+         ]);
     }
 
 

@@ -19,8 +19,11 @@ use App\Http\Controllers\API\TracerController;
 use App\Http\Controllers\API\TracerEntrepreneurController;
 use App\Http\Controllers\API\TracerStudyController;
 use App\Http\Controllers\API\TracerWorkController;
+use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +79,15 @@ Route::post('/alumni', [AlumniController::class, 'store']);
 Route::get('/alumni/{id}', [AlumniController::class, 'show']);
 Route::put('/alumni/{id}', [AlumniController::class, 'update']);
 Route::delete('/alumni/{id}', [AlumniController::class, 'destroy']);
+// Import Alumni from Excel
+Route::post('/import', function(){
+    Excel::import(new UsersImport, request()->file('file'));
+    $response = [
+        'messege' => 'Import Alumni Success'
+    ];
+
+    return response($response, 201);
+});
 // validate alumni by admin endpoint
 Route::put('/validate/{id}', [AlumniController::class, 'setValidate']);
 Route::put('/unvalidate/{id}', [AlumniController::class, 'unValidate']);
