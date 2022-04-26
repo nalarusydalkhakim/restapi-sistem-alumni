@@ -36,7 +36,7 @@ class DepartementController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'faculty_id' => 'required|string',
-            'Departement_name' => 'required|string',
+            'departement_name' => 'required|string',
         ]);
 
         // run validation
@@ -47,12 +47,12 @@ class DepartementController extends Controller
         try {
             $departement = Departement::create([
                 'faculty_id' => $request->faculty_id,
-                'Departement_name' => $request->Departement_name
+                'departement_name' => $request->departement_name
             ]);
     
             $response = [
                 'messege' => 'Departement Created',
-                'Departement' => $departement
+                'departement' => $departement
             ];
     
             return response($response, 201);
@@ -74,7 +74,7 @@ class DepartementController extends Controller
         $departement = Departement::findOrFail($id);
         $response = [
             'messege' => 'Detail of Department',
-            'Departement' => $departement
+            'departement' => $departement
         ];
 
         return response($response, 200);
@@ -91,7 +91,7 @@ class DepartementController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'faculty_id' => 'required|string',
-            'Departement_name' => 'required|string',
+            'departement_name' => 'required|string',
         ]);
 
         // run validation
@@ -104,12 +104,12 @@ class DepartementController extends Controller
         try {
             $departement->update([
                 'faculty_id' => $request->faculty_id,
-                'Departement_name' => $request->Departement_name
+                'departement_name' => $request->departement_name
             ]);
     
             $response = [
                 'messege' => 'Department Updated',
-                'Departement' => $departement
+                'departement' => $departement
             ];
     
             return response($response, 201);

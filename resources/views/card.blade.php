@@ -1,27 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Hi</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Document</title>
+    <style>
+        @page { margin: 5px; }
+        body { 
+            margin: 5px;
+            font-family: sans-serif;
+        }
+        table, th, td {
+            /* border: 0.1px solid; */
+            padding: 3px;
+        }
+        .front{
+            color: #13B9F5;
+            font-weight: bold;
+        }
+        .photo{
+            width: 227px;
+            height: 270px;
+            /* align: top; */
+            /* display: inline-block; */
+            float: top;
+            padding-top: 6px;
+            padding-left: 4px;
+            padding-right: 0px;
+        }
+    </style>
 </head>
-<body>
-    <h1>TESTING PDF VIEW</h1>
-    <p>Test 2</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    <img src="{{asset('storage/image/kartu.png')}}" style="width: 100%;">
-    {{-- @php
-        // $image
-        // $imageData = base64_encode(file_get_contents('img/E-Kartu_Alumni_UNS.png'));
-        // $src = 'data'. mime_content_type()
-        $path = asset('storage/image/E-Kartu_Alumni_UNS.png');
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    @endphp
-    <img src="<?= $base64 ?>" style="width: 100%;"> --}}
+{{-- 342px 429px ktp size --}}
+<body style="background-image: url({{ public_path("storage/image/kartu.png") }});background-size: 100% ;background-repeat: no-repeat;">
+    <table width="98%" style="padding: 170px 5px 5px 5px;">
+        <tr>
+            <td width="20%" class="front">Nama</td>
+            <td width="5%">:</td>
+            <td>{{ $name }}</td>
+            <td rowspan="15" width="32%" style="padding-right: 0px;">
+                <img src="{{ public_path("storage/".$photo) }}" class="photo"  alt="">
+            </td>
+        </tr>
+        <tr>
+            <td class="front">NIK</td>
+            <td>:</td>
+            <td>{{ $nik }}</td>
+        </tr>
+        <tr>
+            <td class="front">Nomor Anggota</td>
+            <td>:</td>
+            <td>{{ $no_member }}</td>
+        </tr>
+        <tr>
+            <td class="front">TTL</td>
+            <td>:</td>
+            <td>{{ $birth }}</td>
+        </tr>
+        <tr>
+            <td class="front">Fakultas/Prodi</td>
+            <td>:</td>
+            <td>{{ $fac_dep }}</td>
+        </tr>
+        <tr>
+            <td class="front">Lulus Tahun</td>
+            <td>:</td>
+            <td>{{ $graduate_year }}</td>
+        </tr>
+        <tr>
+            <td height="20px"></td>
+        </tr>
+        <tr>
+            <td class="front">Kadarluasa</td>
+            <td>:</td>
+            <td>{{ $expired_date }}</td>
+        </tr>
+        <tr>
+            <td colspan="3" style="font-size: 10px;">ISI TRACER STUDY KEMBALI UNTUK MEMPERBARUI MASA KADARLUASA</td>
+        </tr>
+    </table>
 </body>
 </html>

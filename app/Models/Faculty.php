@@ -15,7 +15,7 @@ class Faculty extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'kode',
+        'code',
         'faculty_name'
     ];
 }

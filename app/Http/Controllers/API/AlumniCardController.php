@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Barryvdh\DomPDF\Facade as PDF;
-use Dompdf\Dompdf;
+use App\Models\TracerUpdateHistory;
+use App\Models\User;
 use Illuminate\Http\Request;
+// use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AlumniCardController extends Controller
 {
@@ -17,21 +19,26 @@ class AlumniCardController extends Controller
      */
     public function generateAlumniCard($user_id)
     {
-        // $data = [
-        //     'title' => 'Welcome to ItSolutionStuff.com',
-        //     'date' => date('m/d/Y')
-        // ];
-          
-        // $pdf = PDF::loadView('card', $data)->setOptions(['defaultFont' => 'sans-serif','isRemoteEnabled' => true]);
-    
-        // return $pdf->stream('itsolutionstuff.pdf');
+        $user = User::findOrFail($user_id);
+        $tracer = TracerUpdateHistory::where('user_id', $user_id )->orderBy('expired_date', 'DESC')->first();
+        
+        $data = [
+            'title' => 'Welcome to ItSolutionStuff.com',
+            'date' => date('m/d/Y'),    
+            'name' => $user->name,
+            'nik' => $user->nik,
+            'no_member' => $user->nim,
+            'birth' => $user->birth_place.', '.date("d M Y", strtotime($user->birth_date)),
+            'fac_dep' => $user->faculty.' / '.$user->departement,
+            'graduate_year' => date("d M Y", strtotime($user->graduate_year)),
+            'expired_date' => date("d M Y", strtotime($tracer->expired_date)),
+            'photo' => $user->photo,
+        ];
 
-        $pdf = new Dompdf();
-        $html = view('card');
-        $pdf->loadHtml($html, 'UTF-8');
-        $pdf->setPaper('A4', 'portrait');
-        $pdf->render();
-        $filename = "Hi!";
-        return $pdf->stream($filename, ["Attachment" => false]);
+        $customPaper = array(0,0,257, 322);
+          
+        $pdf = PDF::loadView('card', $data);
+        // ->setPaper('A6', 'potrait')
+        return $pdf->download('invoice.pdf');
     }
 }
