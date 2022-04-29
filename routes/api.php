@@ -80,14 +80,7 @@ Route::get('/alumni/{id}', [AlumniController::class, 'show']);
 Route::put('/alumni/{id}', [AlumniController::class, 'update']);
 Route::delete('/alumni/{id}', [AlumniController::class, 'destroy']);
 // Import Alumni from Excel
-Route::post('/import', function(){
-    Excel::import(new UsersImport, request()->file('file'));
-    $response = [
-        'messege' => 'Import Alumni Success'
-    ];
-
-    return response($response, 201);
-});
+Route::post('/import', [AlumniController::class, 'alumniImport']);
 // validate alumni by admin endpoint
 Route::put('/validate/{id}', [AlumniController::class, 'setValidate']);
 Route::put('/unvalidate/{id}', [AlumniController::class, 'unValidate']);

@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Imports\UsersImport;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AlumniController extends Controller
 {
@@ -208,15 +209,15 @@ class AlumniController extends Controller
         }
     }
 
-    public function alumniImport(array $row)
+    public function alumniImport(Request $request)
     {
-        return new User([
-            'name'     => $row[0],
-            'email'    => $row[1],
-            'nik'      => $row[2],
-            'nim'      => $row[3],
-            'password' => $row[5]
-         ]);
+        $import_data = Excel::import(new UsersImport, request()->file('file'));
+        $response = [
+            'messege' => 'Import Alumni Success',
+            'data' => $import_data
+        ];
+    
+        return response($response, 201);
     }
 
 
