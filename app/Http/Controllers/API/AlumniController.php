@@ -4,6 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Imports\UsersImport;
+use App\Models\TracerEntrepreneur;
+use App\Models\TracerStudy;
+use App\Models\TracerWork;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -77,10 +80,26 @@ class AlumniController extends Controller
                 'organization' => $request->prganization,
                 'achievement' => $request->achievement,
             ]);
+
+            // Create Tracer on Register
+            $tracer_work = TracerWork::create([
+                'user_id' => $user->id
+            ]);
+
+            $tracer_study = TracerStudy::create([
+                'user_id' => $user->id
+            ]);
+
+            $tracer_entrepreneur = TracerEntrepreneur::create([
+                'user_id' => $user->id
+            ]);
     
             $response = [
                 'messege' => 'User Created',
-                'user' => $user
+                'user' => $user,
+                'tracer_work' => $tracer_work,
+                'tracer_study' => $tracer_study,
+                'tracer_entrepreneur' => $tracer_entrepreneur,
             ];
     
             return response($response, 201);
