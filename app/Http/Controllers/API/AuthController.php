@@ -103,7 +103,7 @@ class AuthController extends Controller
         return response()->json([$response, 200]);
     }
 
-    public function change_password(Request $request)
+    public function changePassword(Request $request)
     {
         $validator = Validator::make($request->all(),[
             'password' => 'required|min:8',

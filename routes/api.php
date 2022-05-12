@@ -43,6 +43,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 //Its For Alumni User but tami need this on public route :)
 Route::get('/logout', [AuthController::class, 'logout']);
+Route::post('/change_password', [AuthController::class, 'changePassword']);
 // Dashboard Alumni
 Route::get('/dashboard/{id}', [DashboardAlumniController::class, 'showDashboard']);
 // User Profile Endpoint
