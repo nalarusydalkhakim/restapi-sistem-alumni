@@ -16,6 +16,8 @@ class TracerUpdateHistory extends Model
      */
     protected $fillable = [
         'user_id',
+        'description',
+        'completed',
         'update_date',
         'expired_date',
     ];

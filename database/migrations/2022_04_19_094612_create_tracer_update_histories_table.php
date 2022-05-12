@@ -16,6 +16,7 @@ class CreateTracerUpdateHistoriesTable extends Migration
         Schema::create('tracer_update_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('description')->nullable();
             $table->date('update_date')->nullable();
             $table->date('expired_date')->nullable();
             $table->boolean('completed')->default(false);

@@ -17,6 +17,7 @@ use App\Http\Controllers\API\FacultyController;
 use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\API\TracerController;
 use App\Http\Controllers\API\TracerEntrepreneurController;
+use App\Http\Controllers\API\TracerNoWrokController;
 use App\Http\Controllers\API\TracerStudyController;
 use App\Http\Controllers\API\TracerWorkController;
 use App\Imports\UsersImport;
@@ -50,7 +51,7 @@ Route::get('/dashboard/{id}', [DashboardAlumniController::class, 'showDashboard'
 Route::get('/profile/{id}', [ProfileController::class, 'show']);
 Route::put('/profile/{id}', [ProfileController::class, 'update']);
 Route::post('/profile/{id}', [ProfileController::class, 'update']);
-// All Tracer Endpoint
+// Tracer History
 Route::get('tracer/{id}', [TracerController::class, 'getUpdateHistory']);
 // Tracer Study Endpoint
 // Route::post('/tracer_s', [TracerStudyController::class, 'store']);
@@ -64,6 +65,8 @@ Route::post('/tracer_w/{id}', [TracerWorkController::class, 'update']);
 // Route::post('/tracer_e', [TracerEntrepreneurController::class, 'store']);
 Route::get('/tracer_e/{id}', [TracerEntrepreneurController::class, 'show']);
 Route::put('/tracer_e/{id}', [TracerEntrepreneurController::class, 'update']);
+// Tracer No Work
+Route::post('/no_work/{id}', [TracerNoWrokController::class, 'noWork']);
 // Generate CV for Alumni
 Route::get('/cv/{id}', [CVCOntroller::class, 'show']);
 // Generate Alumni Card

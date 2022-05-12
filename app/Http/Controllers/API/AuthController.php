@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\TracerEntrepreneur;
+use App\Models\TracerNoWork;
 use App\Models\TracerStudy;
 use App\Models\TracerWork;
 use App\Models\User;
