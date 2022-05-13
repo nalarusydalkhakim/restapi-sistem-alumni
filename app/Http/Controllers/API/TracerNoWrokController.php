@@ -17,7 +17,7 @@ class TracerNoWrokController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function NoWork($user_id)
+    public function noWork($user_id)
     {
         try {
             $tracer_update_history = TracerUpdateHistory::create([
