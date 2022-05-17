@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('nik')->unique();
             $table->string('nim')->unique();
-            $table->string('faculty')->nullable();
-            $table->string('departement')->nullable();
+            $table->string('faculty_id')->constrained('faculties')->onDelete('cascade')->nullable();
+            $table->string('departement_id')->constrained('departemens')->onDelete('cascade')->nullable();
             $table->date('entry_year')->nullable();
             $table->date('graduate_year')->nullable();
             $table->date('birth_date')->nullable();

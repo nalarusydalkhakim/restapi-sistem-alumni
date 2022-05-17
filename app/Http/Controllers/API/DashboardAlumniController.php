@@ -22,35 +22,6 @@ class DashboardAlumniController extends Controller
     {
         $user = User::findOrFail($user_id);
 
-        // its not work :")
-
-        // $tracer_study = TracerStudy::findOrFail($user_id);
-        // $tracer_work = TracerWork::findOrFail($user_id);
-        // $tracer_entrepteneur = TracerEntrepreneur::findOrFail($user_id);
-
-        
-        // $expired_date = null;
-
-        // if ($tracer_study->completed || $tracer_work->completed || $tracer_entrepteneur->completed) {
-        //     $tracer_completed = 1;
-        //     //expired_date for tracer
-        //     if ($tracer_study->expired_date < $tracer_work->expired_date) {
-        //         if ($tracer_work->expired_date < $tracer_entrepteneur->expired_date) {
-        //             $expired_date = $tracer_entrepteneur->expired_date;
-        //         }else{
-        //             $expired_date = $tracer_work->expired_date;
-        //         }
-        //     }else{
-        //         if ($tracer_study->expired_date < $tracer_entrepteneur->expired_date) {
-        //             $expired_date = $tracer_entrepteneur->expired_date;
-        //         }else{
-        //             $expired_date = $tracer_study->expired_date;
-        //         }
-        //     }   
-        // }else{
-        //     $tracer_completed = 0;
-        // }
-
         $tracer =  TracerUpdateHistory::where('user_id', $user_id )->orderBy('expired_date', 'DESC')->first();
 
         if ($tracer) {
@@ -64,6 +35,7 @@ class DashboardAlumniController extends Controller
         $response = [
             'messege' => 'Dashboard Alumni',
             'profile_completed' => $user->completed,
+            'profile_validated' => $user->validated,
             'tracer_completed' => $tracer_completed,
             'expired_date' => $expired_date
         ];

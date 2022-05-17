@@ -24,7 +24,9 @@ class AlumniController extends Controller
      */
     public function index()
     {
-        $user = User::get();
+        $user = User::leftjoin('faculties', 'faculties.id', '=', 'users.faculty_id')
+                        ->leftjoin('departements', 'departements.id', '=', 'users.departement_id')
+                        ->get();
         $response = [
             'messege' => 'List of Alumni',
             'user' => $user
@@ -49,8 +51,8 @@ class AlumniController extends Controller
             'birth_date' => 'required',
             'birth_place' => 'required|string',
             'gender' => 'required|string',
-            'faculty' => 'required|string',
-            'departement' => 'required|string',
+            'faculty_id' => 'required|string',
+            'departement_id' => 'required|string',
         ]);
 
         // run validation
@@ -65,8 +67,8 @@ class AlumniController extends Controller
                 'nik' => $request->nik,
                 'nim' => $request->nim,
                 'password' => Hash::make(Carbon::createFromFormat('Y-m-d', $request->birth_date)->format('dmY')), //ex. from 1999-05-23 to 23051999
-                'faculty' => $request->faculty,
-                'departement' => $request->departement,
+                'faculty_id' => $request->faculty_id,
+                'departement_id' => $request->departement_id,
                 'entry_year' => $request->entry_year,
                 'graduate_year' => $request->graduate_year,
                 'birth_date' => $request->birth_date,
@@ -144,8 +146,8 @@ class AlumniController extends Controller
             'birth_date' => 'required',
             'birth_place' => 'required|string',
             'gender' => 'required|string',
-            'faculty' => 'required|string',
-            'departement' => 'required|string',
+            'faculty_id' => 'required|string',
+            'departement_id' => 'required|string',
         ]);
 
         // run validation
@@ -160,8 +162,8 @@ class AlumniController extends Controller
                 'email' => $request->email,
                 'nik' => $request->nik,
                 'nim' => $request->nim,
-                'faculty' => $request->faculty,
-                'departement' => $request->departement,
+                'faculty_id' => $request->faculty,
+                'departement_id' => $request->departement,
                 'entry_year' => $request->entry_year,
                 'graduate_year' => $request->graduate_year,
                 'birth_date' => $request->birth_date,

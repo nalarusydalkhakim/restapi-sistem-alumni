@@ -19,7 +19,9 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::leftjoin('faculties', 'faculties.id', '=', 'users.faculty_id')
+                        ->leftjoin('departements', 'departements.id', '=', 'users.departement_id')
+                        ->findOrFail($id);
         $response = [
             'messege' => 'Detail of User Profile',
             'user' => $user
@@ -42,8 +44,8 @@ class ProfileController extends Controller
             'email' => 'required|string|email',
             'nik' => 'required|string',
             'nim' => 'required|string',
-            'faculty' => 'required|string',
-            'departement' => 'required|string',
+            'faculty_id' => 'required|string',
+            'departement_id' => 'required|string',
             'entry_year' => 'required',
             'graduate_year' => 'required',
             'birth_date' => 'required',
@@ -56,7 +58,7 @@ class ProfileController extends Controller
             'achievement' => 'required|string',
             'gpa' => 'required',
             'diploma_number' => 'required|string',
-            // 'photo' => 'image:jpeg,png,jpg|max:5120',
+            // 'photo' => 'image:jpeg,png,jpg|max:2048',
             // 'identity_card' => 'image:jpeg,png,jpg|max:5120',
             // 'bachelor_certificate' => 'image:jpeg,png,jpg|max:5120'
         ]);
@@ -90,8 +92,8 @@ class ProfileController extends Controller
                 'email' => $request->email,
                 'nik' => $request->nik,
                 'nim' => $request->nim,
-                'faculty' => $request->faculty,
-                'departement' => $request->departement,
+                'faculty_id' => $request->faculty_id,
+                'departement_id' => $request->departement_id,
                 'entry_year' => $request->entry_year,
                 'graduate_year' => $request->graduate_year,
                 'birth_date' => $request->birth_date,

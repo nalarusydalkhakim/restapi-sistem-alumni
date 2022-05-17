@@ -51,6 +51,10 @@ Route::get('/dashboard/{id}', [DashboardAlumniController::class, 'showDashboard'
 Route::get('/profile/{id}', [ProfileController::class, 'show']);
 Route::put('/profile/{id}', [ProfileController::class, 'update']);
 Route::post('/profile/{id}', [ProfileController::class, 'update']);
+// list faculty
+Route::get('/list_faculty', [FacultyController::class, 'index']);
+// list departement
+Route::get('/list_departement/{id}', [DepartementController::class, 'listDepartements']); //faculty id
 // Tracer History
 Route::get('tracer/{id}', [TracerController::class, 'getUpdateHistory']);
 // Tracer Study Endpoint

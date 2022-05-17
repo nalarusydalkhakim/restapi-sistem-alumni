@@ -27,6 +27,22 @@ class DepartementController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listDepartements($faculty_id)
+    {
+        $departement = Departement::where('faculty_id', $faculty_id)->get();
+        $response = [
+            'messege' => 'List of Departement By Faculty Id',
+            'Departement' => $departement
+        ];
+
+        return response($response, 200);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

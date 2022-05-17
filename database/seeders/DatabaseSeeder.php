@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             TracerStudySeeder::class,
             TracerWorkSeeder::class,
             TracerEntrepreneurSeeder::class,
+            FacultySeeder::class,
+            DepartementSeeder::class,
         ]);
     }
 }

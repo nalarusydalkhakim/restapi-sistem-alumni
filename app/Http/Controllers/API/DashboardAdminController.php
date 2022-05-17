@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\TracerEntrepreneur;
 use App\Models\TracerStudy;
+use App\Models\TracerUpdateHistory;
 use App\Models\TracerWork;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,6 +25,7 @@ class DashboardAdminController extends Controller
         $tracer_study_count = TracerStudy::where('completed', 1)->count();
         $tracer_work_count = TracerWork::where('completed', 1)->count();
         $tracer_entrepreneur_count = TracerEntrepreneur::where('completed', 1)->count();
+        // $tracer_no_work = TracerUpdateHistory::groupBy('user.id')->
         $tracer_completed_count = User::join('tracer_update_histories', 'tracer_update_histories.user_id', '=', 'users.id')
                                         ->groupBy('users.id')
                                         ->get()
