@@ -43,38 +43,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 //Its For Alumni User but tami need this on public route :)
-Route::get('/logout', [AuthController::class, 'logout']);
-Route::post('/change_password', [AuthController::class, 'changePassword']);
-// Dashboard Alumni
-Route::get('/dashboard/{id}', [DashboardAlumniController::class, 'showDashboard']);
-// User Profile Endpoint
-Route::get('/profile/{id}', [ProfileController::class, 'show']);
-Route::put('/profile/{id}', [ProfileController::class, 'update']);
-Route::post('/profile/{id}', [ProfileController::class, 'update']);
-// list faculty
-Route::get('/list_faculty', [FacultyController::class, 'index']);
-// list departement
-Route::get('/list_departement/{id}', [DepartementController::class, 'listDepartements']); //faculty id
-// Tracer History
-Route::get('tracer/{id}', [TracerController::class, 'getUpdateHistory']);
-// Tracer Study Endpoint
-// Route::post('/tracer_s', [TracerStudyController::class, 'store']);
-Route::get('/tracer_s/{id}', [TracerStudyController::class, 'show']);
-Route::put('/tracer_s/{id}', [TracerStudyController::class, 'update']);
-// Tracer Work Endpoint
-// Route::post('/tracer_w', [TracerWorkController::class, 'store']);
-Route::get('/tracer_w/{id}', [TracerWorkController::class, 'show']);
-Route::post('/tracer_w/{id}', [TracerWorkController::class, 'update']);
-// Tracer Entrepreneur Endpoint
-// Route::post('/tracer_e', [TracerEntrepreneurController::class, 'store']);
-Route::get('/tracer_e/{id}', [TracerEntrepreneurController::class, 'show']);
-Route::put('/tracer_e/{id}', [TracerEntrepreneurController::class, 'update']);
-// Tracer No Work
-Route::post('/no_work/{id}', [TracerNoWrokController::class, 'noWork']);
-// Generate CV for Alumni
-Route::get('/cv/{id}', [CVCOntroller::class, 'show']);
-// Generate Alumni Card
-Route::get('/card/{id}', [AlumniCardController::class, 'generateAlumniCard']);
+// Code has been move
 
 
 
@@ -110,14 +79,38 @@ Route::delete('/departement/{id}', [DepartementController::class, 'destroy']);
 
 // protected routes
 Route::group(['middleware' => ['auth:sanctum']], function(){
-    // Route::get('/logout', [AuthController::class, 'logout']);
-    // // User Profile Endpoint
-    // Route::get('/profile/{id}', [ProfileController::class, 'show']);
-    // Route::put('/profile/{id}', [ProfileController::class, 'update']);
-    // // Tracer Study Endpoint
-    // Route::post('/tracer', [TracerStudyController::class, 'store']);
-    // Route::get('/tracer/{id}', [TracerStudyController::class, 'show']);
-    // Route::put('/tracer/{id}', [TracerStudyController::class, 'update']);
+    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::post('/change_password', [AuthController::class, 'changePassword']);
+    // Dashboard Alumni
+    Route::get('/dashboard/{id}', [DashboardAlumniController::class, 'showDashboard']);
+    // User Profile Endpoint
+    Route::get('/profile/{id}', [ProfileController::class, 'show']);
+    Route::put('/profile/{id}', [ProfileController::class, 'update']);
+    Route::post('/profile/{id}', [ProfileController::class, 'update']);
+    // list faculty
+    Route::get('/list_faculty', [FacultyController::class, 'index']);
+    // list departement
+    Route::get('/list_departement/{id}', [DepartementController::class, 'listDepartements']); //faculty id
+    // Tracer History
+    Route::get('tracer/{id}', [TracerController::class, 'getUpdateHistory']);
+    // Tracer Study Endpoint
+    // Route::post('/tracer_s', [TracerStudyController::class, 'store']);
+    Route::get('/tracer_s/{id}', [TracerStudyController::class, 'show']);
+    Route::put('/tracer_s/{id}', [TracerStudyController::class, 'update']);
+    // Tracer Work Endpoint
+    // Route::post('/tracer_w', [TracerWorkController::class, 'store']);
+    Route::get('/tracer_w/{id}', [TracerWorkController::class, 'show']);
+    Route::post('/tracer_w/{id}', [TracerWorkController::class, 'update']);
+    // Tracer Entrepreneur Endpoint
+    // Route::post('/tracer_e', [TracerEntrepreneurController::class, 'store']);
+    Route::get('/tracer_e/{id}', [TracerEntrepreneurController::class, 'show']);
+    Route::put('/tracer_e/{id}', [TracerEntrepreneurController::class, 'update']);
+    // Tracer No Work
+    Route::post('/no_work/{id}', [TracerNoWrokController::class, 'noWork']);
+    // Generate CV for Alumni
+    Route::get('/cv/{id}', [CVCOntroller::class, 'show']);
+    // Generate Alumni Card
+    Route::get('/card/{id}', [AlumniCardController::class, 'generateAlumniCard']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
