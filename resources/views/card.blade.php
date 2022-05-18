@@ -12,6 +12,7 @@
         table, th, td {
             /* border: 0.1px solid; */
             padding: 3px;
+            font-size: 14px;
         }
         .front{
             color: #13B9F5;
@@ -30,7 +31,7 @@
     </style>
 </head>
 {{-- 342px 429px ktp size --}}
-<body style="background-image: url({{ public_path("storage/image/kartu.png") }});background-size: 100% ;background-repeat: no-repeat;">
+<body style="background-image: url({{ public_path("storage/image/kartu_update_1.png") }});background-size: 100% ;background-repeat: no-repeat;">
     <table width="98%" style="padding: 170px 5px 5px 5px;">
         <tr>
             <td width="20%" class="front">Nama</td>
@@ -74,7 +75,10 @@
             <td>{{ $expired_date }}</td>
         </tr>
         <tr>
-            <td colspan="3" style="font-size: 10px;">ISI TRACER STUDY KEMBALI UNTUK MEMPERBARUI MASA KADARLUASA</td>
+            <td height="10px"></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="font-size: 6px;">ISI TRACER STUDY KEMBALI UNTUK MEMPERBARUI MASA KADARLUASA</td>
         </tr>
         <tr>
             <td colspan="3"><div>{!! DNS1D::getBarcodeHTML($nik, 'C128') !!}</div></td>
