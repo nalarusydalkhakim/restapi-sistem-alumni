@@ -19,7 +19,9 @@ class AlumniCardController extends Controller
      */
     public function generateAlumniCard($user_id)
     {
-        $user = User::findOrFail($user_id);
+        $user = User::leftjoin('faculties', 'faculties.id', '=', 'users.faculty_id')
+                        ->leftjoin('departements', 'departements.id', '=', 'users.departement_id')
+                        ->findOrFail($user_id);
         $tracer = TracerUpdateHistory::where('user_id', $user_id )->orderBy('expired_date', 'DESC')->first();
         
         $data = [
@@ -29,7 +31,7 @@ class AlumniCardController extends Controller
             'nik' => $user->nik,
             'no_member' => $user->nim,
             'birth' => $user->birth_place.', '.date("d M Y", strtotime($user->birth_date)),
-            'fac_dep' => $user->faculty.' / '.$user->departement,
+            'fac_dep' => $user->faculty_name.' / '.$user->departement_name,
             'graduate_year' => date("d M Y", strtotime($user->graduate_year)),
             'expired_date' => date("d M Y", strtotime($tracer->expired_date)),
             'photo' => $user->photo,
@@ -39,6 +41,6 @@ class AlumniCardController extends Controller
           
         $pdf = PDF::loadView('card', $data);
         // ->setPaper('A6', 'potrait')
-        return $pdf->download('invoice.pdf');
+        return $pdf->download('Kartu_Alumni.pdf');
     }
 }

@@ -51,8 +51,8 @@ class AlumniController extends Controller
             'birth_date' => 'required',
             'birth_place' => 'required|string',
             'gender' => 'required|string',
-            'faculty_id' => 'required|string',
-            'departement_id' => 'required|string',
+            'faculty_id' => 'required',
+            'departement_id' => 'required',
         ]);
 
         // run validation
@@ -120,7 +120,9 @@ class AlumniController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::leftjoin('faculties', 'faculties.id', '=', 'users.faculty_id')
+                        ->leftjoin('departements', 'departements.id', '=', 'users.departement_id')
+                        ->findOrFail($id);
         $response = [
             'messege' => 'Detail of Alumni',
             'user' => $user
@@ -146,8 +148,8 @@ class AlumniController extends Controller
             'birth_date' => 'required',
             'birth_place' => 'required|string',
             'gender' => 'required|string',
-            'faculty_id' => 'required|string',
-            'departement_id' => 'required|string',
+            'faculty_id' => 'required',
+            'departement_id' => 'required',
         ]);
 
         // run validation

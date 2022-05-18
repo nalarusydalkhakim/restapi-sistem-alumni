@@ -76,6 +76,16 @@
         <tr>
             <td colspan="3" style="font-size: 10px;">ISI TRACER STUDY KEMBALI UNTUK MEMPERBARUI MASA KADARLUASA</td>
         </tr>
+        <tr>
+            <td colspan="3"><div>{!! DNS1D::getBarcodeHTML($nik, 'C128') !!}</div></td>
+        </tr>
+    </table>
+    <table  style="margin-top: 50px;margin-left: auto;margin-right: auto;">
+        <tr>
+            <td>
+                <div style="margin-left: auto;margin-right: auto;">{!! DNS2D::getBarcodeHTML($nik, 'QRCODE') !!}</div>
+            </td>
+        </tr>
     </table>
 </body>
 </html>

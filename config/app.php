@@ -178,6 +178,8 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         // Excel
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        // Barcode
+        Milon\Barcode\BarcodeServiceProvider::class,
 
     ],
 
@@ -235,7 +237,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
     ],
 
 ];
