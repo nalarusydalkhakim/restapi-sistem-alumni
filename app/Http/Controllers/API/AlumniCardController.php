@@ -41,6 +41,6 @@ class AlumniCardController extends Controller
           
         $pdf = PDF::loadView('card', $data);
         // ->setPaper('A6', 'potrait')
-        return $pdf->download('Kartu_Alumni.pdf');
+        return $pdf->stream('Kartu_Alumni.pdf');
     }
 }
