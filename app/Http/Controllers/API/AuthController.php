@@ -23,12 +23,30 @@ class AuthController extends Controller
             'email' => 'required|string|unique:users|email',
             'nik' => 'required|string|unique:users',
             'nim' => 'required|string|unique:users',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
+            'photo' => 'image:jpeg,png,jpg|max:2048',
+            'identity_card' => 'image:jpeg,png,jpg|max:5120',
+            'bachelor_certificate' => 'image:jpeg,png,jpg|max:5120'
         ]);
 
         // run validation
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
+        }
+
+        if ($request->file('photo')) {
+            $photo_path = $request->file('photo')->store('uploads/foto');
+            $request->photo = $photo_path;
+        }
+
+        if ($request->file('identity_card')) {
+            $identity_card_path = $request->file('identity_card')->store('uploads/ktp');
+            $request->identity_card = $identity_card_path;
+        }
+
+        if ($request->file('bachelor_certificate')) {
+            $bachelor_certificate_path = $request->file('bachelor_certificate')->store('uploads/ijazah');
+            $request->bachelor_certificate = $bachelor_certificate_path;
         }
 
         try {
@@ -37,7 +55,13 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'nik' => $request->nik,
                 'nim' => $request->nim,
-                'password' => Hash::make($request->password)
+                'password' => Hash::make($request->password),
+                'photo' => $request->photo,
+                'photo_url' => asset('storage/'.$request->photo),
+                'identity_card' => $request->identity_card,
+                'identity_card_url' => asset('storage/'.$request->identity_card),
+                'bachelor_certificate' => $request->bachelor_certificate,
+                'bachelor_certificate_url' => asset('storage/'.$request->bachelor_certificate),
             ]);
             
             // Create Tracer on Register
@@ -52,17 +76,13 @@ class AuthController extends Controller
             $tracer_entrepreneur = TracerEntrepreneur::create([
                 'user_id' => $user->id
             ]);
-
-            // Create Token for Authorization
-            $token = $user->createToken('token')->plainTextToken;
     
             $response = [
                 'messege' => 'User Registed',
                 'user' => $user,
                 'tracer_work' => $tracer_work,
                 'tracer_study' => $tracer_study,
-                'tracer_entrepreneur' => $tracer_entrepreneur,
-                'token' => $token
+                'tracer_entrepreneur' => $tracer_entrepreneur
             ];
     
             return response($response, 201);
@@ -87,21 +107,34 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->username)->orWhere('nik', $request->username)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if ($user) {
+            if (Hash::check($request->password, $user->password)) {
+                if ($user->validated) {
+                    // create token
+                    $token = $user->createToken('token')->plainTextToken;
+
+                    $response = [
+                        'message' => 'Login success',
+                        'user' => $user,
+                        'token' => $token
+                    ];
+                    return response()->json([$response, 200]);
+
+                }else {
+                    return response()->json([
+                        'User Not Validated'
+                    ], 401);
+                }
+            }else {
+                return response()->json([
+                    'Password Wrong'
+                ], 401);
+            }
+        } else{
             return response()->json([
-                'UNAUTHORIZED'
+                'User Not Recognized'
             ], 401);
         }
-
-        $token = $user->createToken('token')->plainTextToken;
-
-        $response = [
-            'message' => 'success',
-            'user' => $user,
-            'token' => $token
-        ];
-
-        return response()->json([$response, 200]);
     }
 
     public function changePassword(Request $request)
