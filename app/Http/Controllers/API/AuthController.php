@@ -123,12 +123,12 @@ class AuthController extends Controller
                 }else {
                     return response()->json([
                         'User Not Validated'
-                    ], 401);
+                    ], 403);
                 }
             }else {
                 return response()->json([
                     'Password Wrong'
-                ], 401);
+                ], 422);
             }
         } else{
             return response()->json([
