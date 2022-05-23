@@ -34,7 +34,7 @@ class AuthController extends Controller
             $response = [
                 'success' => false,
                 'code' => 422,
-                'message' => 'Eror : '.$validator->errors()
+                'message' => $validator->errors()
             ];
             return response()->json($response, 422);
         }
@@ -84,6 +84,7 @@ class AuthController extends Controller
     
             $response = [
                 'success' => true,
+                'code' => 201,
                 'message' => 'User Registed',
                 'user' => $user,
                 'tracer_work' => $tracer_work,
@@ -113,7 +114,7 @@ class AuthController extends Controller
             $response = [
                 'success' => false,
                 'code' => 422,
-                'message' => 'Eror : '.$validator->errors()
+                'message' => $validator->errors()
             ];
             return response()->json($response, 422);
         }
@@ -170,7 +171,7 @@ class AuthController extends Controller
             $response = [
                 'success' => false,
                 'code' => 422,
-                'message' => 'Eror : '.$validator->errors()
+                'message' => $validator->errors()
             ];
             return response()->json($response, 422);
         }
