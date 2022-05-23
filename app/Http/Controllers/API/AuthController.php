@@ -24,9 +24,9 @@ class AuthController extends Controller
             'nik' => 'required|string|unique:users',
             'nim' => 'required|string|unique:users',
             'password' => 'required|min:8',
-            'photo' => 'image:jpeg,png,jpg|max:2048',
-            'identity_card' => 'image:jpeg,png,jpg|max:5120',
-            'bachelor_certificate' => 'image:jpeg,png,jpg|max:5120'
+            'photo' => 'required|image:jpeg,png,jpg|max:2048',
+            'identity_card' => 'required|image:jpeg,png,jpg|max:5120',
+            'bachelor_certificate' => 'required|image:jpeg,png,jpg|max:5120'
         ]);
 
         // run validation
