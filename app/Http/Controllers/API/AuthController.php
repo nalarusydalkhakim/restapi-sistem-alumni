@@ -31,7 +31,12 @@ class AuthController extends Controller
 
         // run validation
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => 'Eror : '.$validator->errors()
+            ];
+            return response()->json($response, 422);
         }
 
         if ($request->file('photo')) {
@@ -78,7 +83,8 @@ class AuthController extends Controller
             ]);
     
             $response = [
-                'messege' => 'User Registed',
+                'success' => true,
+                'message' => 'User Registed',
                 'user' => $user,
                 'tracer_work' => $tracer_work,
                 'tracer_study' => $tracer_study,
@@ -88,8 +94,10 @@ class AuthController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
-                'messege' => 'Failed '.$e->errorInfo
-            ]);
+                'success' => false,
+                'code' => 422,
+                'message' => 'Failed '.$e->errorInfo
+            ], 422);
         }
     }
 
@@ -102,7 +110,12 @@ class AuthController extends Controller
 
         // run validation
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => 'Eror : '.$validator->errors()
+            ];
+            return response()->json($response, 422);
         }
 
         $user = User::where('email', $request->username)->orWhere('nik', $request->username)->first();
@@ -114,7 +127,9 @@ class AuthController extends Controller
                     $token = $user->createToken('token')->plainTextToken;
 
                     $response = [
-                        'message' => 'Login success',
+                        'success' => true,
+                        'code' => 200,
+                        'message' => 'Login successs',
                         'user' => $user,
                         'token' => $token
                     ];
@@ -122,17 +137,23 @@ class AuthController extends Controller
 
                 }else {
                     return response()->json([
-                        'User Not Validated'
+                        'success' => false,
+                        'code' => 403,
+                        'message' => 'User Not Validated'
                     ], 403);
                 }
             }else {
                 return response()->json([
-                    'Password Wrong'
+                    'success' => false,
+                    'code' => 422,
+                    'message' => 'Password Wrong'
                 ], 422);
             }
         } else{
             return response()->json([
-                'User Not Recognized'
+                'success' => false,
+                'code' => 422,
+                'message' => 'User Not Recognized'
             ], 401);
         }
     }
@@ -146,30 +167,42 @@ class AuthController extends Controller
 
         // run validation
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => 'Eror : '.$validator->errors()
+            ];
+            return response()->json($response, 422);
         }
 
         $user = User::findOrFail($request->id);
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!Hash::check($request->password, $user->password)) {
             return response()->json([
-                'UNAUTHORIZED'
-            ], 401);
-        }
-
-        try {
-            $user->update([
-                'password' => Hash::make($request->new_password)
-            ]);
-            $response = [
-                'messege' => 'Password Changed'
-            ];
-    
-            return response($response, 200);
-        } catch (QueryException $e) {
-            return response()->json([
-                'messege' => 'Failed '.$e->errorInfo
-            ]);
+                'success' => false,
+                'code' => 422,
+                'message' => 'Password Wrong'
+            ], 422);
+        }else{
+            try {
+                $user->update([
+                    'password' => Hash::make($request->new_password)
+                ]);
+                $response = [   
+                    'success' => true,
+                    'code' => 200,
+                    'message' => 'Password Changed'
+                ];
+        
+                return response($response, 200);
+                
+            } catch (QueryException $e) {
+                return response()->json([
+                    'success' => false,
+                    'code' => 422,
+                    'message' => 'Failed '.$e->errorInfo
+                ], 422);
+            }
         }
     }
 
@@ -179,7 +212,9 @@ class AuthController extends Controller
         $user->currentAccessToken()->delete();
 
         return response()->json([
-            'messege' => 'Logout Success'
-        ]);
+            'success' => true,
+            'code' => 200,
+            'message' => 'Logout successs'
+        ], 200);
     }
 }
