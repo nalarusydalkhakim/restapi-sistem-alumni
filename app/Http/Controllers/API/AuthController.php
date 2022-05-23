@@ -155,9 +155,9 @@ class AuthController extends Controller
         } else{
             return response()->json([
                 'success' => false,
-                'code' => 422,
+                'code' => 404,
                 'message' => 'User Not Recognized'
-            ], 401);
+            ], 404);
         }
     }
 
