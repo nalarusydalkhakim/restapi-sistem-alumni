@@ -122,9 +122,9 @@ class ProfileController extends Controller
             ];
     
             return response($response, 201);
-        } catch (QueryException $e) {
+        } catch (\Throwable $th) {
             return response()->json([
-                'messege' => 'Failed '.$e->errorInfo
+                'messege' => 'Failed :'.$th->getMessage()
             ]);
         }
     }
