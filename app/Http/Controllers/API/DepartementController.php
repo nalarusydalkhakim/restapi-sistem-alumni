@@ -17,7 +17,7 @@ class DepartementController extends Controller
      */
     public function index()
     {
-        $departement = Departement::leftjoin('faculties', 'faculties.id', '=', 'departments.faculty_id')
+        $departement = Departement::leftjoin('faculties', 'faculties.id', '=', 'departements.faculty_id')
                         ->select('departements.*', 'faculties.faculty_name')
                         ->get();
         $response = [
