@@ -32,7 +32,7 @@ class AlumniController extends Controller
                                 ->orWhere('nik', $request->search);
                         })->latest();
 
-        $userQuery->select('users.*', 'faculties.faculty_name', 'departments.department_name');
+        $userQuery->select('users.*', 'faculties.faculty_name', 'departements.departement_name');
 
         $user = $userQuery->paginate($request->get('per_page', 10));
         $response = [
