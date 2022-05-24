@@ -22,11 +22,19 @@ class AlumniController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = User::leftjoin('faculties', 'faculties.id', '=', 'users.faculty_id')
+        $userQuery = User::leftjoin('faculties', 'faculties.id', '=', 'users.faculty_id')
                         ->leftjoin('departements', 'departements.id', '=', 'users.departement_id')
-                        ->get();
+                        ->when($request->search, function ($q) use ($request) {
+                            return $q->where('name', 'like', '%'.$request->search.'%')
+                                ->orWhere('nim', $request->search)
+                                ->orWhere('nik', $request->search);
+                        })->latest();
+
+        $userQuery->select('users.*', 'faculties.faculty_name', 'departments.department_name');
+
+        $user = $userQuery->paginate($request->get('per_page', 10));
         $response = [
             'messege' => 'List of Alumni',
             'user' => $user
