@@ -12,6 +12,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -240,7 +241,7 @@ class AlumniController extends Controller
         }
     }
 
-    public function alumniImport(Request $request)
+    public function alumniImport()
     {
         $import_data = Excel::import(new UsersImport, request()->file('file'));
         $response = [
@@ -249,6 +250,20 @@ class AlumniController extends Controller
         ];
     
         return response($response, 201);
+    }
+
+    public function downloadTemplate()
+    {
+        // // Get path from storage directory
+        $path = public_path("storage/document/import_alumni.xlsx");
+        $filename = 'template_import_alumni.xlsx';
+
+        // Download file with custom headers
+        return response()->download($path, $filename, [
+            'Content-Type' => 'application/vnd.ms-excel',
+            'Content-Disposition' => 'inline; filename="' . $filename . '"'
+        ]);
+        // return Storage::download('app/public/document/import_alumni.xlsx');
     }
 
 

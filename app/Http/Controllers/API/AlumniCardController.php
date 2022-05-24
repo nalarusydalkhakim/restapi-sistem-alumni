@@ -24,23 +24,47 @@ class AlumniCardController extends Controller
                         ->findOrFail($user_id);
         $tracer = TracerUpdateHistory::where('user_id', $user_id )->orderBy('expired_date', 'DESC')->first();
         
-        $data = [
-            'title' => 'Welcome to ItSolutionStuff.com',
-            'date' => date('m/d/Y'),    
-            'name' => $user->name,
-            'nik' => $user->nik,
-            'no_member' => $user->nim,
-            'birth' => $user->birth_place.', '.date("d M Y", strtotime($user->birth_date)),
-            'fac_dep' => $user->faculty_name.' / '.$user->departement_name,
-            'graduate_year' => date("d M Y", strtotime($user->graduate_year)),
-            'expired_date' => date("d M Y", strtotime($tracer->expired_date)),
-            'photo' => $user->photo,
-        ];
-
-        $customPaper = array(0,0,257, 322);
-          
-        $pdf = PDF::loadView('card', $data);
-        // ->setPaper('A6', 'potrait')
-        return $pdf->stream('Kartu_Alumni.pdf');
+        if ($tracer) {
+            if ($user->completed) {
+                if ($user->validated) {
+                    $data = [
+                        'title' => 'Kartu Alumni UNS',
+                        'date' => date('m/d/Y'),    
+                        'name' => $user->name,
+                        'nik' => $user->nik,
+                        'no_member' => $user->nim,
+                        'birth' => $user->birth_place.', '.date("d M Y", strtotime($user->birth_date)),
+                        'fac_dep' => $user->faculty_name.' / '.$user->departement_name,
+                        'graduate_year' => date("d M Y", strtotime($user->graduate_year)),
+                        'expired_date' => date("d M Y", strtotime($tracer->expired_date)),
+                        'photo' => $user->photo,
+                    ];
+            
+                    // $customPaper = array(0,0,257, 322);
+                      
+                    $pdf = PDF::loadView('card', $data);
+                    // ->setPaper('A6', 'potrait')
+                    return $pdf->stream('Kartu_Alumni.pdf');
+                }else {
+                    return response()->json([
+                        'success' => false,
+                        'code' => 403,
+                        'message' => 'User is not validated'
+                    ], 403);
+                }
+            }else {
+                return response()->json([
+                    'success' => false,
+                    'code' => 403,
+                    'message' => 'User profile is not completed'
+                ], 403);
+            }
+        }else{
+            return response()->json([
+                'success' => false,
+                'code' => 403,
+                'message' => 'User has not filled in the tracer study'
+            ], 403);
+        }
     }
 }
