@@ -125,7 +125,7 @@ class ProfileController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'messege' => 'Failed :'.$th->getMessage()
-            ]);
+            ], 500);
         }
     }
 
