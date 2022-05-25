@@ -19,8 +19,8 @@ class DashboardAdminController extends Controller
      */
     public function index()
     {
-        $user_count = User::count();
-        $user_completed_count = User::where('completed', 1)->count();
+        $user_count = User::where('role', 'user')->count();
+        $user_completed_count = User::where('completed', 1)->where('role', 'user')->count();
         $user_uncompleted_count = $user_count - $user_completed_count;
         $tracer_study_count = TracerStudy::where('completed', 1)->count();
         $tracer_work_count = TracerWork::where('completed', 1)->count();
