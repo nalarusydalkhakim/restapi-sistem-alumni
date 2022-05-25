@@ -195,7 +195,7 @@ class AlumniController extends Controller
                 'social_media' => $request->social_media,
                 'gpa' => $request->gpa, //its called ipk in indo :)
                 'diploma_number' => $request->diploma_number,
-                'organization' => $request->prganization,
+                'organization' => $request->organization,
                 'achievement' => $request->achievement,
             ]);
             $response = [
