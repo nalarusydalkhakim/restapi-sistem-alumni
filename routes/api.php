@@ -40,6 +40,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 // public routes
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login_admin', [AuthController::class, 'loginAdmin']);
 Route::post('/register', [AuthController::class, 'register']);
 
 //Its For Alumni User but tami need this on public route :)
@@ -62,6 +63,11 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     // User Profile Endpoint
     Route::get('/profile/{id}', [ProfileController::class, 'show']);
     Route::post('/profile/{id}', [ProfileController::class, 'update']);
+
+    // untuk sementara
+    Route::get('/faculty', [FacultyController::class, 'index']);
+    Route::get('/departement', [DepartementController::class, 'index']);
+
 
     // For user alumni
     Route::group(['middleware' => ['checkrole:user']], function(){
@@ -110,13 +116,11 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::put('/validate/{id}', [AlumniController::class, 'setValidate']);
         Route::put('/unvalidate/{id}', [AlumniController::class, 'unValidate']);
         // Faculty Endpoint
-        Route::get('/faculty', [FacultyController::class, 'index']);
         Route::post('/faculty', [FacultyController::class, 'store']);
         Route::get('/faculty/{id}', [FacultyController::class, 'show']);
         Route::put('/faculty/{id}', [FacultyController::class, 'update']);
         Route::delete('/faculty/{id}', [FacultyController::class, 'destroy']);
         // Departement Endpoint
-        Route::get('/departement', [DepartementController::class, 'index']);
         Route::post('/departement', [DepartementController::class, 'store']);
         Route::get('/departement/{id}', [DepartementController::class, 'show']);
         Route::put('/departement/{id}', [DepartementController::class, 'update']);

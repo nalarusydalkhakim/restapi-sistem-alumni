@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
-    public function Register(Request $request)
+    public function register(Request $request)
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required|string',
@@ -103,7 +103,7 @@ class AuthController extends Controller
         }
     }
 
-    public function Login(Request $request)
+    public function login(Request $request)
     {
         $validator = Validator::make($request->all(),[
             'username' => 'required',
@@ -124,33 +124,107 @@ class AuthController extends Controller
         $user = User::where('email', $request->username)->orWhere('nik', $request->username)->first();
 
         if ($user) {
-            if (Hash::check($request->password, $user->password)) {
-                if ($user->validated) {
-                    // create token
-                    $token = $user->createToken('token')->plainTextToken;
-
-                    $response = [
-                        'success' => true,
-                        'code' => 200,
-                        'message' => 'Login successs',
-                        'user' => $user,
-                        'token' => $token
-                    ];
-                    return response()->json([$response, 200]);
-
+            if ($user->role == 'user') {
+                if (Hash::check($request->password, $user->password)) {
+                    if ($user->validated) {
+                        // create token
+                        $token = $user->createToken('token')->plainTextToken;
+    
+                        $response = [
+                            'success' => true,
+                            'code' => 200,
+                            'message' => 'Login successs',
+                            'user' => $user,
+                            'token' => $token
+                        ];
+                        return response()->json([$response, 200]);
+    
+                    }else {
+                        return response()->json([
+                            'success' => false,
+                            'code' => 403,
+                            'message' => 'User Not Validated'
+                        ], 403);
+                    }
                 }else {
                     return response()->json([
                         'success' => false,
-                        'code' => 403,
-                        'message' => 'User Not Validated'
-                    ], 403);
+                        'code' => 422,
+                        'message' => 'Password Wrong'
+                    ], 422);
                 }
             }else {
                 return response()->json([
                     'success' => false,
-                    'code' => 422,
-                    'message' => 'Password Wrong'
-                ], 422);
+                    'code' => 403,
+                    'message' => 'You are not supposed to acces this site'
+                ], 403);
+            }
+        } else{
+            return response()->json([
+                'success' => false,
+                'code' => 404,
+                'message' => 'User Not Recognized'
+            ], 404);
+        }
+    }
+
+    public function loginAdmin(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'username' => 'required',
+            'password' => 'required|min:8'
+        ]);
+
+        // run validation
+        if ($validator->fails()) {
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()
+            ];
+            return response()->json($response, 422);
+        }
+
+        $user = User::where('email', $request->username)->first();
+
+        if ($user) {
+            if ($user->role == 'admin') {
+                if (Hash::check($request->password, $user->password)) {
+                    if ($user->validated) {
+                        // create token
+                        $token = $user->createToken('token')->plainTextToken;
+    
+                        $response = [
+                            'success' => true,
+                            'code' => 200,
+                            'message' => 'Login successs',
+                            'user' => $user,
+                            'token' => $token
+                        ];
+                        return response()->json([$response, 200]);
+    
+                    }else {
+                        return response()->json([
+                            'success' => false,
+                            'code' => 403,
+                            'message' => 'User Not Validated'
+                        ], 403);
+                    }
+                }else {
+                    return response()->json([
+                        'success' => false,
+                        'code' => 422,
+                        'message' => 'Password Wrong'
+                    ], 422);
+                }
+            }else {
+                return response()->json([
+                    'success' => false,
+                    'code' => 403,
+                    'message' => 'You are not supposed to acces this site'
+                ], 403);
             }
         } else{
             return response()->json([
@@ -210,7 +284,7 @@ class AuthController extends Controller
         }
     }
 
-    public function Logout(Request $request)
+    public function logout(Request $request)
     {
         $user = $request->user();
         $user->currentAccessToken()->delete();
