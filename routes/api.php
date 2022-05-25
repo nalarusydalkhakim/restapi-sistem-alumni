@@ -59,13 +59,14 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::post('/change_password', [AuthController::class, 'changePassword']);
 
+    // User Profile Endpoint
+    Route::get('/profile/{id}', [ProfileController::class, 'show']);
+    Route::post('/profile/{id}', [ProfileController::class, 'update']);
+
     // For user alumni
     Route::group(['middleware' => ['checkrole:user']], function(){
         // Dashboard Alumni
         Route::get('/dashboard/{id}', [DashboardAlumniController::class, 'showDashboard']);
-        // User Profile Endpoint
-        Route::get('/profile/{id}', [ProfileController::class, 'show']);
-        Route::post('/profile/{id}', [ProfileController::class, 'update']);
         // list faculty
         Route::get('/list_faculty', [FacultyController::class, 'index']);
         // list departement
