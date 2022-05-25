@@ -27,6 +27,7 @@ class AlumniController extends Controller
     {
         $userQuery = User::leftjoin('faculties', 'faculties.id', '=', 'users.faculty_id')
                         ->leftjoin('departements', 'departements.id', '=', 'users.departement_id')
+                        ->where('role', 'user')
                         ->when($request->search, function ($q) use ($request) {
                             return $q->where('name', 'like', '%'.$request->search.'%')
                                 ->orWhere('nim', $request->search)
