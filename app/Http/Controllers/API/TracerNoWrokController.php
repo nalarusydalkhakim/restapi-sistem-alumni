@@ -36,8 +36,8 @@ class TracerNoWrokController extends Controller
 
         } catch (QueryException $e) {
             return response()->json([
-                'messege' => 'Failed '.$e->errorInfo
-            ]);
+                'messege' => 'Failed '.$e->getMessage()
+            ],500);
         }
     }
 }

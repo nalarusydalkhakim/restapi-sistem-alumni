@@ -58,8 +58,8 @@ class FacultyController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
-                'messege' => 'Failed '.$e->errorInfo
-            ]);
+                'messege' => 'Failed '.$e->getMessage()
+            ],500);
         }
     }
 
@@ -115,8 +115,8 @@ class FacultyController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
-                'messege' => 'Failed '.$e->errorInfo
-            ]);
+                'messege' => 'Failed '.$e->getMessage()
+            ],500);
         }
     }
 
@@ -138,8 +138,8 @@ class FacultyController extends Controller
             return response($response, 200);
         } catch (QueryException $e) {
             return response()->json([
-                'messege' => 'Failed '.$e->errorInfo
-            ]);
+                'messege' => 'Failed '.$e->getMessage()
+            ],500);
         }
     }
 }

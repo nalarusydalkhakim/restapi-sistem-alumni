@@ -89,7 +89,7 @@ class AlumniController extends Controller
                 'social_media' => $request->social_media,
                 'gpa' => $request->gpa, //its called ipk in indo :)
                 'diploma_number' => $request->diploma_number,
-                'organization' => $request->prganization,
+                'organization' => $request->organization,
                 'achievement' => $request->achievement,
             ]);
 
@@ -117,8 +117,8 @@ class AlumniController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
-                'messege' => 'Failed '.$e->errorInfo
-            ]);
+                'messege' => 'Failed '.$e->getMessage()
+            ],500);
         }
     }
 
@@ -155,11 +155,20 @@ class AlumniController extends Controller
             'email' => 'required|string|email',
             'nik' => 'required|string',
             'nim' => 'required|string',
+            'faculty_id' => 'required',
+            'departement_id' => 'required',
+            'entry_year' => 'required',
+            'graduate_year' => 'required',
             'birth_date' => 'required',
             'birth_place' => 'required|string',
             'gender' => 'required|string',
-            'faculty_id' => 'required',
-            'departement_id' => 'required',
+            'address' => 'required|string',
+            'phone_number' => 'required|string',
+            'social_media' => 'required|string',
+            'organization' => 'required|string',
+            'achievement' => 'required|string',
+            'gpa' => 'required',
+            'diploma_number' => 'required|string',
         ]);
 
         // run validation
@@ -197,8 +206,8 @@ class AlumniController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
-                'messege' => 'Failed '.$e->errorInfo
-            ]);
+                'messege' => 'Failed '.$e->getMessage()
+            ],500);
         }
     }
 
@@ -218,8 +227,8 @@ class AlumniController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
-                'messege' => 'Failed '.$e->errorInfo
-            ]);
+                'messege' => 'Failed '.$e->getMessage()
+            ],500);
         }
     }
 
@@ -237,8 +246,8 @@ class AlumniController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
-                'messege' => 'Failed '.$e->errorInfo
-            ]);
+                'messege' => 'Failed '.$e->getMessage()
+            ],500);
         }
     }
 
@@ -287,8 +296,8 @@ class AlumniController extends Controller
             return response($response, 200);
         } catch (QueryException $e) {
             return response()->json([
-                'messege' => 'Failed '.$e->errorInfo
-            ]);
+                'messege' => 'Failed '.$e->getMessage()
+            ],500);
         }
     }
 }
