@@ -279,9 +279,8 @@ class AlumniController extends Controller
              $response = [
                 'success' => false,
                 'code' => 422,
-                'messege' => 'Import Alumni Failed',
-                'error' => 'Error at row '.$failure->row().' with attribute '.$failure->attribute().' : '.implode(" and ",$failure->errors()),
-                'data' => $e->failures()
+                'messege' => 'Error at row '.$failure->row().' with attribute '.$failure->attribute().' : '.implode(" and ",$failure->errors()),
+                'errors' => $e->failures()
             ];
             
             return response($response, 422);
