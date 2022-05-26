@@ -251,15 +251,41 @@ class AlumniController extends Controller
         }
     }
 
-    public function alumniImport()
+    public function alumniImport(Request $request)
     {
-        $import_data = Excel::import(new UsersImport, request()->file('file'));
-        $response = [
-            'messege' => 'Import Alumni Success',
-            'data' => $import_data
-        ];
-    
-        return response($response, 201);
+        // $import = Excel::import(new UsersImport, $request->file('file'));
+        $import = new UsersImport;
+        try { 
+            $import->import($request->file('file'));
+            $response = [
+                'success' => true,
+                'code' => 201,
+                'messege' => 'Import Alumni Success',
+                'data' => $import
+            ];
+            
+            return response($response, 201);
+
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+             $failures = $e->failures();
+             
+             foreach ($failures as $failure) {
+                 $failure->row(); // row that went wrong
+                 $failure->attribute(); // either heading key (if using heading row concern) or column index
+                 $failure->errors(); // Actual error messages from Laravel validator
+                 $failure->values(); // The values of the row that has failed.
+             }
+
+             $response = [
+                'success' => false,
+                'code' => 422,
+                'messege' => 'Import Alumni Failed',
+                'error' => 'Error at row '.$failure->row().' with attribute '.$failure->attribute().' : '.implode(" and ",$failure->errors()),
+                'data' => $e->failures()
+            ];
+            
+            return response($response, 422);
+        }
     }
 
     public function downloadTemplate()

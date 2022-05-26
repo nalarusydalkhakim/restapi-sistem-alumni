@@ -143,7 +143,7 @@ class AuthController extends Controller
                         return response()->json([
                             'success' => false,
                             'code' => 403,
-                            'message' => 'User Not Validated'
+                            'message' => 'Perhatian! Akun anda sedang proses validasi oleh Admin. Silahkan tunggu beberapa saat lagi!'
                         ], 403);
                     }
                 }else {
@@ -192,26 +192,17 @@ class AuthController extends Controller
         if ($user) {
             if ($user->role == 'admin') {
                 if (Hash::check($request->password, $user->password)) {
-                    if ($user->validated) {
-                        // create token
-                        $token = $user->createToken('token')->plainTextToken;
+                     // create token
+                     $token = $user->createToken('token')->plainTextToken;
     
-                        $response = [
-                            'success' => true,
-                            'code' => 200,
-                            'message' => 'Login successs',
-                            'user' => $user,
-                            'token' => $token
-                        ];
-                        return response()->json([$response, 200]);
-    
-                    }else {
-                        return response()->json([
-                            'success' => false,
-                            'code' => 403,
-                            'message' => 'User Not Validated'
-                        ], 403);
-                    }
+                     $response = [
+                         'success' => true,
+                         'code' => 200,
+                         'message' => 'Login successs',
+                         'user' => $user,
+                         'token' => $token
+                     ];
+                     return response()->json([$response, 200]);
                 }else {
                     return response()->json([
                         'success' => false,
