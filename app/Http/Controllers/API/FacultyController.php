@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Departement;
 use App\Models\Faculty;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -129,8 +130,11 @@ class FacultyController extends Controller
     public function destroy($id)
     {
         $faculty = Faculty::findOrFail($id);
+
         try {
             $faculty->delete();
+            // Delete department that have relation on faculty
+            Departement::where('faculty_id', $id)->delete();
             $response = [
                 'messege' => 'Faculty Deleted'
             ];

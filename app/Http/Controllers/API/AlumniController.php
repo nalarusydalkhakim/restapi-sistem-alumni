@@ -91,6 +91,7 @@ class AlumniController extends Controller
                 'diploma_number' => $request->diploma_number,
                 'organization' => $request->organization,
                 'achievement' => $request->achievement,
+                'validated' => 1,
             ]);
 
             // Create Tracer on Register
@@ -312,8 +313,14 @@ class AlumniController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+        $tracer_study = TracerStudy::where('user_id',$id)->firstOrFail();
+        $tracer_work = TracerWork::where('user_id',$id)->firstOrFail();
+        $tracer_entrepreneur = TracerEntrepreneur::where('user_id',$id)->firstOrFail();
         try {
             $user->delete();
+            $tracer_study->delete();
+            $tracer_work->delete();
+            $tracer_entrepreneur->delete();
             $response = [
                 'messege' => 'Alumni Deleted'
             ];
