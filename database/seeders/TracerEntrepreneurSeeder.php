@@ -15,7 +15,7 @@ class TracerEntrepreneurSeeder extends Seeder
     public function run()
     {
         DB::table('tracer_entrepreneurs')->insert([
-            'user_id' => 1
+            'user_id' => 2
         ]);
     }
 }

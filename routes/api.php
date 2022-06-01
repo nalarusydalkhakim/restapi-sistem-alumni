@@ -111,6 +111,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::delete('/alumni/{id}', [AlumniController::class, 'destroy']);
         // Import Alumni from Excel
         Route::post('/import', [AlumniController::class, 'alumniImport']);
+        Route::get('/export', [AlumniController::class, 'alumniExport']);
         Route::get('/template', [AlumniController::class, 'downloadTemplate']);
         // validate alumni by admin endpoint
         Route::put('/validate/{id}', [AlumniController::class, 'setValidate']);
