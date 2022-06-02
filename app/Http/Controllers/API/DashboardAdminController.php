@@ -33,6 +33,8 @@ class DashboardAdminController extends Controller
         $tracer_uncompleted_count = $user_count - $tracer_completed_count;
 
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'Dashboard Admin',
             'user_count' => $user_count,
             'user_completed_count' => $user_completed_count,

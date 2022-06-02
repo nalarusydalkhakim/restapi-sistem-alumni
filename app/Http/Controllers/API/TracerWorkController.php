@@ -34,6 +34,8 @@ class TracerWorkController extends Controller
             $tracer_work = TracerWork::create($request->all());
 
             $response = [
+                'success' => true,
+                'code' => 200,
                 'messege' => 'Tracer Work Created',
                 'tracer_work' => $tracer_work
             ];
@@ -41,6 +43,8 @@ class TracerWorkController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }
@@ -56,6 +60,8 @@ class TracerWorkController extends Controller
     {
         $tracer_work = TracerWork::where('user_id',$user_id)->firstOrFail();
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'Detail of Tracer Work',
             'tracer_work' => $tracer_work
         ];
@@ -86,7 +92,13 @@ class TracerWorkController extends Controller
 
         // run validation
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()
+            ];
+            return response()->json($response, 422);
         }
         
         $tracer_work = TracerWork::where('user_id',$user_id)->firstOrFail();
@@ -115,6 +127,8 @@ class TracerWorkController extends Controller
             ]);
 
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'Tracer Work Updated',
                 'tracer_work' => $tracer_work,
                 'tracer_update_history' => $tracer_update_history
@@ -123,6 +137,8 @@ class TracerWorkController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }
@@ -142,13 +158,17 @@ class TracerWorkController extends Controller
             $tracer_work->delete();
 
             $response = [
+                'success' => true,
+                'code' => 200,
                 'messege' => 'Tracer Work Deleted',
                 'tracer_work' => $tracer_work
             ];
     
-            return response($response, 201);
+            return response($response, 200);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }

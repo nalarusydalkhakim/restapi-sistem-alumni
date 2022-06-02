@@ -19,6 +19,8 @@ class TracerController extends Controller
     {
         $tracer_update_history = TracerUpdateHistory::where('user_id',$user_id)->get();
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'List of Tracer Update History',
             'tracer_update_history' => $tracer_update_history
         ];

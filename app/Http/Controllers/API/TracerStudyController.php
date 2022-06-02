@@ -46,6 +46,8 @@ class TracerStudyController extends Controller
     {
         $tracer_study = TracerStudy::where('user_id',$user_id)->firstOrFail();
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'Detail of Tracer Study',
             'tracer_study' => $tracer_study
         ];
@@ -74,7 +76,13 @@ class TracerStudyController extends Controller
 
         // run validation
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()
+            ];
+            return response()->json($response, 422);
         }
         
         $tracer_study = TracerStudy::where('user_id',$user_id)->firstOrFail();
@@ -101,6 +109,8 @@ class TracerStudyController extends Controller
             ]);
 
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'Tracer Study Updated',
                 'tracer_study' => $tracer_study,
                 'tracer_update_history' => $tracer_update_history
@@ -109,6 +119,8 @@ class TracerStudyController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }
@@ -128,13 +140,17 @@ class TracerStudyController extends Controller
             $tracer_study->delete();
 
             $response = [
+                'success' => true,
+                'code' => 200,
                 'messege' => 'Tracer Study Deleted',
                 'tracer_study' => $tracer_study
             ];
     
-            return response($response, 201);
+            return response($response, 200);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }

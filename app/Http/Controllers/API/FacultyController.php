@@ -20,6 +20,8 @@ class FacultyController extends Controller
     {
         $faculty = Faculty::get();
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'List of Faculties',
             'faculty' => $faculty
         ];
@@ -42,7 +44,13 @@ class FacultyController extends Controller
 
         // run validation
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()
+            ];
+            return response()->json($response, 422);
         }
         
         try {
@@ -52,6 +60,8 @@ class FacultyController extends Controller
             ]);
     
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'Faculty Created',
                 'faculty' => $faculty
             ];
@@ -59,6 +69,8 @@ class FacultyController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }
@@ -74,6 +86,8 @@ class FacultyController extends Controller
     {
         $faculty = Faculty::findOrFail($id);
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'Detail of Faculty',
             'faculty' => $faculty
         ];
@@ -97,7 +111,13 @@ class FacultyController extends Controller
 
         // run validation
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()
+            ];
+            return response()->json($response, 422);
         }
         
         $faculty = Faculty::findOrFail($id);
@@ -109,6 +129,8 @@ class FacultyController extends Controller
             ]);
     
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'Faculty Updated',
                 'faculty' => $faculty
             ];
@@ -116,6 +138,8 @@ class FacultyController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }
@@ -136,12 +160,16 @@ class FacultyController extends Controller
             // Delete department that have relation on faculty
             Departement::where('faculty_id', $id)->delete();
             $response = [
+                'success' => true,
+                'code' => 200,
                 'messege' => 'Faculty Deleted'
             ];
     
             return response($response, 200);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }

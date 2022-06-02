@@ -39,6 +39,8 @@ class AlumniController extends Controller
 
         $user = $userQuery->paginate($request->get('per_page', 10));
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'List of Alumni',
             'user' => $user
         ];
@@ -66,10 +68,16 @@ class AlumniController extends Controller
             'departement_id' => 'required',
         ]);
 
-        // run validation
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
+       // run validation
+       if ($validator->fails()) {
+        $response = [
+            'success' => false,
+            'code' => 422,
+            'message' => $validator->errors()->first(),
+            'errors' => $validator->errors()
+        ];
+        return response()->json($response, 422);
+    }
         
         try {
             $user = User::create([
@@ -109,6 +117,8 @@ class AlumniController extends Controller
             ]);
     
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'User Created',
                 'user' => $user,
                 'tracer_work' => $tracer_work,
@@ -119,6 +129,8 @@ class AlumniController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }
@@ -136,6 +148,8 @@ class AlumniController extends Controller
                         ->leftjoin('departements', 'departements.id', '=', 'users.departement_id')
                         ->findOrFail($id);
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'Detail of Alumni',
             'user' => $user
         ];
@@ -175,7 +189,13 @@ class AlumniController extends Controller
 
         // run validation
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()
+            ];
+            return response()->json($response, 422);
         }
 
         $user = User::findOrFail($id);
@@ -201,6 +221,8 @@ class AlumniController extends Controller
                 'achievement' => $request->achievement,
             ]);
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'Alumni Updated',
                 'user' => $user
             ];
@@ -208,6 +230,8 @@ class AlumniController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }
@@ -223,12 +247,16 @@ class AlumniController extends Controller
                 'validated' => 1
             ]);
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'Alumni Validated'
             ];
     
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }
@@ -242,12 +270,16 @@ class AlumniController extends Controller
                 'validated' => 0
             ]);
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'Alumni Unvalidated'
             ];
     
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }
@@ -328,12 +360,16 @@ class AlumniController extends Controller
             $tracer_work->delete();
             $tracer_entrepreneur->delete();
             $response = [
+                'success' => true,
+                'code' => 200,
                 'messege' => 'Alumni Deleted'
             ];
     
             return response($response, 200);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }

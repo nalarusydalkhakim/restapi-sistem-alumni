@@ -21,6 +21,8 @@ class DepartementController extends Controller
                         ->select('departements.*', 'faculties.faculty_name')
                         ->get();
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'List of Departement',
             'Departement' => $departement
         ];
@@ -37,6 +39,8 @@ class DepartementController extends Controller
     {
         $departement = Departement::where('faculty_id', $faculty_id)->get();
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'List of Departement By Faculty Id',
             'Departement' => $departement
         ];
@@ -59,7 +63,13 @@ class DepartementController extends Controller
 
         // run validation
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()
+            ];
+            return response()->json($response, 422);
         }
         
         try {
@@ -69,6 +79,8 @@ class DepartementController extends Controller
             ]);
     
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'Departement Created',
                 'departement' => $departement
             ];
@@ -76,8 +88,10 @@ class DepartementController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->errorInfo
-            ]);
+            ],500);
         }
     }
 
@@ -91,6 +105,8 @@ class DepartementController extends Controller
     {
         $departement = Departement::findOrFail($id);
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'Detail of Department',
             'departement' => $departement
         ];
@@ -114,7 +130,13 @@ class DepartementController extends Controller
 
         // run validation
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()
+            ];
+            return response()->json($response, 422);
         }
         
         $departement = Departement::findOrFail($id);
@@ -126,6 +148,8 @@ class DepartementController extends Controller
             ]);
     
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'Department Updated',
                 'departement' => $departement
             ];
@@ -133,8 +157,10 @@ class DepartementController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->errorInfo
-            ]);
+            ],500);
         }
     }
 
@@ -150,12 +176,16 @@ class DepartementController extends Controller
         try {
             $departement->delete();
             $response = [
+                'success' => true,
+                'code' => 200,
                 'messege' => 'Departement Deleted'
             ];
     
             return response($response, 200);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->errorInfo
             ]);
         }

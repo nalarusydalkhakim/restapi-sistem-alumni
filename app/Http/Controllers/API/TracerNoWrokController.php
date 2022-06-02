@@ -28,6 +28,8 @@ class TracerNoWrokController extends Controller
                 'expired_date' => Carbon::now()->addMonths(6)->format('Y-m-d')
             ]);
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'Tracer Study Updated',
                 'tracer_update_history' => $tracer_update_history
             ];
@@ -36,6 +38,8 @@ class TracerNoWrokController extends Controller
 
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }

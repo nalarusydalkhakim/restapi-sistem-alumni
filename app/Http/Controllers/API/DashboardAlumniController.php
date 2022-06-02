@@ -33,6 +33,8 @@ class DashboardAlumniController extends Controller
         }
 
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'Dashboard Alumni',
             'profile_completed' => $user->completed,
             'profile_validated' => $user->validated,

@@ -34,6 +34,8 @@ class TracerEntrepreneurController extends Controller
             $tracer_entrepreneur = TracerEntrepreneur::create($request->all());
 
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'Tracer Entrepreneur Created',
                 'tracer_entrepreneur' => $tracer_entrepreneur
             ];
@@ -41,6 +43,8 @@ class TracerEntrepreneurController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }   
@@ -56,6 +60,8 @@ class TracerEntrepreneurController extends Controller
     {
         $tracer_entrepreneur = TracerEntrepreneur::where('user_id',$user_id)->firstOrFail();
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'Detail of Tracer Entrepreneur',
             'tracer_entrepreneur' => $tracer_entrepreneur
         ];
@@ -85,7 +91,13 @@ class TracerEntrepreneurController extends Controller
 
         // run validation
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()
+            ];
+            return response()->json($response, 422);
         }
         
         $tracer_entrepreneur = TracerEntrepreneur::where('user_id',$user_id)->firstOrFail();
@@ -113,6 +125,8 @@ class TracerEntrepreneurController extends Controller
             ]);
 
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'Tracer Entrepreneur Updated',
                 'tracer_entrepreneur' => $tracer_entrepreneur,
                 'tracer_update_history' => $tracer_update_history
@@ -121,6 +135,8 @@ class TracerEntrepreneurController extends Controller
             return response($response, 201);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }
@@ -140,13 +156,17 @@ class TracerEntrepreneurController extends Controller
             $tracer_entrepreneur->delete();
 
             $response = [
+                'success' => true,
+                'code' => 200,
                 'messege' => 'Tracer Entrepreneur Deleted',
                 'tracer_entrepreneur' => $tracer_entrepreneur
             ];
     
-            return response($response, 201);
+            return response($response, 200);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }

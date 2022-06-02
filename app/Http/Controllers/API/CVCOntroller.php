@@ -19,6 +19,8 @@ class CVCOntroller extends Controller
     {
         $user = User::findOrFail($user_id);
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'Generate CV',
             'user' => $user
         ];

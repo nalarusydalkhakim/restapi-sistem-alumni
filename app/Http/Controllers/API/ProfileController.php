@@ -24,6 +24,8 @@ class ProfileController extends Controller
                         ->select('users.*', 'faculties.faculty_name', 'departements.departement_name')
                         ->findOrFail($id);
         $response = [
+            'success' => true,
+            'code' => 200,
             'messege' => 'Detail of User Profile',
             'user' => $user
         ];
@@ -66,7 +68,13 @@ class ProfileController extends Controller
 
         // run validation
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => $validator->errors()->first(),
+                'errors' => $validator->errors()
+            ];
+            return response()->json($response, 422);
         }
 
         if ($request->file('photo')) {
@@ -118,6 +126,8 @@ class ProfileController extends Controller
             ]);
 
             $response = [
+                'success' => true,
+                'code' => 201,
                 'messege' => 'User Profile Updated',
                 'user' => $user
             ];
@@ -125,6 +135,8 @@ class ProfileController extends Controller
             return response($response, 201);
         } catch (\Throwable $th) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed :'.$th->getMessage()
             ], 500);
         }
@@ -142,12 +154,16 @@ class ProfileController extends Controller
         try {
             $user->delete();
             $response = [
+                'success' => true,
+                'code' => 200,
                 'messege' => 'User Deleted'
             ];
     
             return response($response, 200);
         } catch (QueryException $e) {
             return response()->json([
+                'success' => false,
+                'code' => 500,
                 'messege' => 'Failed '.$e->getMessage()
             ],500);
         }
