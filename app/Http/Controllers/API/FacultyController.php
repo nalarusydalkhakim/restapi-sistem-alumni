@@ -62,7 +62,7 @@ class FacultyController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'Faculty Created',
+                'messege' => 'Fakultas berhasil ditambahkan',
                 'faculty' => $faculty
             ];
     
@@ -131,7 +131,7 @@ class FacultyController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'Faculty Updated',
+                'messege' => 'Fakultas berhasil diperbaharui',
                 'faculty' => $faculty
             ];
     
@@ -162,7 +162,7 @@ class FacultyController extends Controller
             $response = [
                 'success' => true,
                 'code' => 200,
-                'messege' => 'Faculty Deleted'
+                'messege' => 'Fakultas berhasil dihapus'
             ];
     
             return response($response, 200);

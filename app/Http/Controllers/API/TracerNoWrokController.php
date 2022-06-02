@@ -30,7 +30,7 @@ class TracerNoWrokController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'Tracer Study Updated',
+                'messege' => 'Tracer Study Berhasil Diupdate',
                 'tracer_update_history' => $tracer_update_history
             ];
     

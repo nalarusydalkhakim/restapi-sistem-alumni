@@ -119,7 +119,7 @@ class AlumniController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'User Created',
+                'messege' => 'Alumni berhasil terdaftar',
                 'user' => $user,
                 'tracer_work' => $tracer_work,
                 'tracer_study' => $tracer_study,
@@ -223,7 +223,7 @@ class AlumniController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'Alumni Updated',
+                'messege' => 'Data Alumni Diperbarui',
                 'user' => $user
             ];
     
@@ -249,7 +249,7 @@ class AlumniController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'Alumni Validated'
+                'messege' => 'Alumni Berhasil Tervalidasi'
             ];
     
             return response($response, 201);
@@ -272,7 +272,7 @@ class AlumniController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'Alumni Unvalidated'
+                'messege' => 'Alumni Tidak Tervalidasi'
             ];
     
             return response($response, 201);
@@ -294,7 +294,7 @@ class AlumniController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'Import Alumni Success',
+                'messege' => 'Import Data Alumni Berhasil',
                 'data' => $import
             ];
             
@@ -313,7 +313,7 @@ class AlumniController extends Controller
              $response = [
                 'success' => false,
                 'code' => 422,
-                'messege' => 'Error at row '.$failure->row().' with attribute '.$failure->attribute().' : '.implode(" and ",$failure->errors()),
+                'messege' => 'Eror Pada Baris '.$failure->row().' Pada Kolom '.$failure->attribute().' : '.implode(" dan ",$failure->errors()),
                 'errors' => $e->failures()
             ];
             
@@ -362,7 +362,7 @@ class AlumniController extends Controller
             $response = [
                 'success' => true,
                 'code' => 200,
-                'messege' => 'Alumni Deleted'
+                'messege' => 'Alumni Berhasil Dihapus'
             ];
     
             return response($response, 200);

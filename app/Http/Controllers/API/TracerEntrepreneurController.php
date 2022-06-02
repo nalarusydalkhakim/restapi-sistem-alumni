@@ -36,7 +36,7 @@ class TracerEntrepreneurController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'Tracer Entrepreneur Created',
+                'messege' => 'Tracer Wiraswasta Berhasil Dibuat',
                 'tracer_entrepreneur' => $tracer_entrepreneur
             ];
     
@@ -127,7 +127,7 @@ class TracerEntrepreneurController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'Tracer Entrepreneur Updated',
+                'messege' => 'Tracer Wiraswasta Berhasil Diperbarui',
                 'tracer_entrepreneur' => $tracer_entrepreneur,
                 'tracer_update_history' => $tracer_update_history
             ];
@@ -158,7 +158,7 @@ class TracerEntrepreneurController extends Controller
             $response = [
                 'success' => true,
                 'code' => 200,
-                'messege' => 'Tracer Entrepreneur Deleted',
+                'messege' => 'Tracer Wiraswasta Berhasil Dihapus',
                 'tracer_entrepreneur' => $tracer_entrepreneur
             ];
     

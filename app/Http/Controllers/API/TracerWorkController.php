@@ -36,7 +36,7 @@ class TracerWorkController extends Controller
             $response = [
                 'success' => true,
                 'code' => 200,
-                'messege' => 'Tracer Work Created',
+                'messege' => 'Tracer Bekerja Berhasil Dibuat',
                 'tracer_work' => $tracer_work
             ];
     
@@ -129,7 +129,7 @@ class TracerWorkController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'Tracer Work Updated',
+                'messege' => 'Tracer Bekerja Berhasil Diperbarui',
                 'tracer_work' => $tracer_work,
                 'tracer_update_history' => $tracer_update_history
             ];
@@ -160,7 +160,7 @@ class TracerWorkController extends Controller
             $response = [
                 'success' => true,
                 'code' => 200,
-                'messege' => 'Tracer Work Deleted',
+                'messege' => 'Tracer Bekerja Berhasil Dihapus',
                 'tracer_work' => $tracer_work
             ];
     

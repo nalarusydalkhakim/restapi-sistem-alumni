@@ -49,21 +49,21 @@ class AlumniCardController extends Controller
                     return response()->json([
                         'success' => false,
                         'code' => 403,
-                        'message' => 'User is not validated'
+                        'message' => 'Pengguna belum divalidasi admin'
                     ], 403);
                 }
             }else {
                 return response()->json([
                     'success' => false,
                     'code' => 403,
-                    'message' => 'User profile is not completed'
+                    'message' => 'Profile pengguna tidak lengkap'
                 ], 403);
             }
         }else{
             return response()->json([
                 'success' => false,
                 'code' => 403,
-                'message' => 'User has not filled in the tracer study'
+                'message' => 'Pengguna belum mengisi Tracer Study'
             ], 403);
         }
     }

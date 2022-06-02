@@ -24,7 +24,7 @@ class TracerStudyController extends Controller
             $tracer_study = TracerStudy::create($request->all());
 
             $response = [
-                'messege' => 'Tracer Study Created',
+                'messege' => 'Tracer Study Berhasil Dibuat',
                 'tracer_study' => $tracer_study
             ];
     
@@ -111,7 +111,7 @@ class TracerStudyController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'Tracer Study Updated',
+                'messege' => 'Tracer Study Berhasil Diperbarui',
                 'tracer_study' => $tracer_study,
                 'tracer_update_history' => $tracer_update_history
             ];
@@ -142,7 +142,7 @@ class TracerStudyController extends Controller
             $response = [
                 'success' => true,
                 'code' => 200,
-                'messege' => 'Tracer Study Deleted',
+                'messege' => 'Tracer Study Berhasil Dihapus',
                 'tracer_study' => $tracer_study
             ];
     

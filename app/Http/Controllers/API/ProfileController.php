@@ -128,7 +128,7 @@ class ProfileController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'User Profile Updated',
+                'messege' => 'Profile Pengguna Berhasil Diperbarui',
                 'user' => $user
             ];
     
@@ -156,7 +156,7 @@ class ProfileController extends Controller
             $response = [
                 'success' => true,
                 'code' => 200,
-                'messege' => 'User Deleted'
+                'messege' => 'Pengguna berhasil dihapus'
             ];
     
             return response($response, 200);

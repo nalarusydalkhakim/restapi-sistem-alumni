@@ -21,10 +21,10 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(),[
             'name' => 'required|string',
             'email' => 'required|string|unique:users|email',
-            'nik' => 'required|string|unique:users',
+            'nik' => 'required|number|unique:users',
             'nim' => 'required|string|unique:users',
             'password' => 'required|min:8',
-            'photo' => 'required|image:jpeg,png,jpg|max:2048',
+            'photo' => 'required|image:jpeg,png,jpg|max:5120',
             'identity_card' => 'required|image:jpeg,png,jpg|max:5120',
             'bachelor_certificate' => 'required|image:jpeg,png,jpg|max:5120'
         ]);
@@ -86,7 +86,7 @@ class AuthController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'message' => 'User Registed',
+                'message' => 'Pengguna sudah terdaftar',
                 'user' => $user,
                 'tracer_work' => $tracer_work,
                 'tracer_study' => $tracer_study,
@@ -133,7 +133,7 @@ class AuthController extends Controller
                         $response = [
                             'success' => true,
                             'code' => 200,
-                            'message' => 'Login successs',
+                            'message' => 'Login Berhasil',
                             'user' => $user,
                             'token' => $token
                         ];
@@ -150,21 +150,21 @@ class AuthController extends Controller
                     return response()->json([
                         'success' => false,
                         'code' => 422,
-                        'message' => 'Password Wrong'
+                        'message' => 'Password Salah'
                     ], 422);
                 }
             }else {
                 return response()->json([
                     'success' => false,
                     'code' => 403,
-                    'message' => 'You are not supposed to acces this site'
+                    'message' => 'Anda tidak seharusnya mengakses ini!'
                 ], 403);
             }
         } else{
             return response()->json([
                 'success' => false,
                 'code' => 404,
-                'message' => 'User Not Recognized'
+                'message' => 'Pengguna tidak diketahui'
             ], 404);
         }
     }
@@ -198,7 +198,7 @@ class AuthController extends Controller
                      $response = [
                          'success' => true,
                          'code' => 200,
-                         'message' => 'Login successs',
+                         'message' => 'Login berhasil',
                          'user' => $user,
                          'token' => $token
                      ];
@@ -207,21 +207,21 @@ class AuthController extends Controller
                     return response()->json([
                         'success' => false,
                         'code' => 422,
-                        'message' => 'Password Wrong'
+                        'message' => 'Password salah'
                     ], 422);
                 }
             }else {
                 return response()->json([
                     'success' => false,
                     'code' => 403,
-                    'message' => 'You are not supposed to acces this site'
+                    'message' => 'Anda tidak seharusnya mengakses ini!'
                 ], 403);
             }
         } else{
             return response()->json([
                 'success' => false,
                 'code' => 404,
-                'message' => 'User Not Recognized'
+                'message' => 'Pengguna tidak diketahui'
             ], 404);
         }
     }
@@ -250,7 +250,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'code' => 422,
-                'message' => 'Password Wrong'
+                'message' => 'Password salah'
             ], 422);
         }else{
             try {
@@ -260,7 +260,7 @@ class AuthController extends Controller
                 $response = [   
                     'success' => true,
                     'code' => 200,
-                    'message' => 'Password Changed'
+                    'message' => 'Password berhasil diubah'
                 ];
         
                 return response($response, 200);
@@ -283,7 +283,7 @@ class AuthController extends Controller
         return response()->json([
             'success' => true,
             'code' => 200,
-            'message' => 'Logout successs'
+            'message' => 'Logout berhasil'
         ], 200);
     }
 }

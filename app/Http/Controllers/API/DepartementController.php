@@ -81,7 +81,7 @@ class DepartementController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'Departement Created',
+                'messege' => 'Jurusan berhasil ditambahkan',
                 'departement' => $departement
             ];
     
@@ -150,7 +150,7 @@ class DepartementController extends Controller
             $response = [
                 'success' => true,
                 'code' => 201,
-                'messege' => 'Department Updated',
+                'messege' => 'Jurusan berhasil diperbarui',
                 'departement' => $departement
             ];
     
@@ -178,7 +178,7 @@ class DepartementController extends Controller
             $response = [
                 'success' => true,
                 'code' => 200,
-                'messege' => 'Departement Deleted'
+                'messege' => 'Jurusan berhasil dihapus'
             ];
     
             return response($response, 200);
