@@ -69,8 +69,8 @@ class TracerStudyController extends Controller
             'university_address' => 'required|string',
             'study_location' => 'required|string',
             'departement' => 'required|string',
-            'entry_year' => 'required',
-            'graduate_year' => 'required',
+            'entry_year' => 'required|numeric',
+            'graduate_year' => 'required|numeric',
             'study_matches' => 'required',
         ]);
 

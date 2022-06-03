@@ -114,7 +114,7 @@ class UsersImport implements ToCollection, SkipsEmptyRows, WithHeadingRow, WithV
             'faculty_id' => 'nullable',
             'departement_id' => 'nullable',
             'alamat' => 'nullable|string',
-            'nomer_hp' => 'nullable|string',
+            'nomer_hp' => 'nullable|numeric',
             'ipk' => 'nullable|numeric',
             'nomor_ijazah' => 'nullable|string',
             'sosmed' => 'nullable|string',

@@ -45,26 +45,36 @@ class ProfileController extends Controller
         $validator = Validator::make($request->all(),[
             'name' => 'required|string',
             'email' => 'required|string|email',
-            'nik' => 'required|string',
+            'nik' => 'required|numeric',
             'nim' => 'required|string',
             'faculty_id' => 'required',
             'departement_id' => 'required',
-            'entry_year' => 'required',
-            'graduate_year' => 'required',
-            'birth_date' => 'required',
+            'entry_year' => 'required|numeric',
+            'graduate_year' => 'required|numeric',
+            'birth_date' => 'required|date',
             'birth_place' => 'required|string',
             'gender' => 'required|string',
             'address' => 'required|string',
-            'phone_number' => 'required|string',
+            'phone_number' => 'required|digits_between:10,14',
             'social_media' => 'required|string',
             'organization' => 'required|string',
             'achievement' => 'required|string',
-            'gpa' => 'required',
+            'gpa' => 'required|numeric',
             'diploma_number' => 'required|string',
-            // 'photo' => 'image:jpeg,png,jpg|max:2048',
-            // 'identity_card' => 'image:jpeg,png,jpg|max:5120',
-            // 'bachelor_certificate' => 'image:jpeg,png,jpg|max:5120'
+            'photo' => 'nullable|image:jpeg,png,jpg|max:5120',
+            'identity_card' => 'nullable|image:jpeg,png,jpg|max:5120',
+            'bachelor_certificate' => 'nullable|image:jpeg,png,jpg|max:5120'
         ]);
+
+        // Checking entry and graduate year
+        if ($request->graduate_year <= $request->entry_year) {
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => 'Tahun Lulus tidak boleh kurang dari Tahun Masuk!',
+            ];
+            return response()->json($response, 422);
+        }
 
         // run validation
         if ($validator->fails()) {

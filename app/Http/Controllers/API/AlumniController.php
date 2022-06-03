@@ -58,15 +58,37 @@ class AlumniController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required|string',
-            'email' => 'required|string|unique:users|email',
-            'nik' => 'required|string|unique:users',
-            'nim' => 'required|string|unique:users',
-            'birth_date' => 'required',
-            'birth_place' => 'required|string',
-            'gender' => 'required|string',
-            'faculty_id' => 'required',
-            'departement_id' => 'required',
+            'email' => 'required|string|email',
+            'nik' => 'required|numeric',
+            'nim' => 'required|string',
+            'faculty_id' => 'nullable',
+            'departement_id' => 'nullable',
+            'entry_year' => 'nullable|numeric',
+            'graduate_year' => 'nullable|numeric',
+            'birth_date' => 'required|date',
+            'birth_place' => 'nullable|string',
+            'gender' => 'nullable|string',
+            'address' => 'nullable|string',
+            'phone_number' => 'nullable|digits_between:10,14',
+            'social_media' => 'nullable|string',
+            'organization' => 'nullable|string',
+            'achievement' => 'nullable|string',
+            'gpa' => 'nullable|numeric',
+            'diploma_number' => 'nullable|string',
+            'photo' => 'nullable|image:jpeg,png,jpg|max:5120',
+            'identity_card' => 'nullable|image:jpeg,png,jpg|max:5120',
+            'bachelor_certificate' => 'nullable|image:jpeg,png,jpg|max:5120'
         ]);
+
+        // Checking entry and graduate year
+        if ($request->graduate_year <= $request->entry_year) {
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => 'Tahun Lulus tidak boleh kurang dari Tahun Masuk!',
+            ];
+            return response()->json($response, 422);
+        }
 
        // run validation
        if ($validator->fails()) {
@@ -169,23 +191,36 @@ class AlumniController extends Controller
         $validator = Validator::make($request->all(),[
             'name' => 'required|string',
             'email' => 'required|string|email',
-            'nik' => 'required|string',
+            'nik' => 'required|numeric',
             'nim' => 'required|string',
-            'faculty_id' => 'required',
-            'departement_id' => 'required',
-            'entry_year' => 'required',
-            'graduate_year' => 'required',
-            'birth_date' => 'required',
-            'birth_place' => 'required|string',
-            'gender' => 'required|string',
-            'address' => 'required|string',
-            'phone_number' => 'required|string',
-            'social_media' => 'required|string',
-            'organization' => 'required|string',
-            'achievement' => 'required|string',
-            'gpa' => 'required',
-            'diploma_number' => 'required|string',
+            'faculty_id' => 'nullable',
+            'departement_id' => 'nullable',
+            'entry_year' => 'nullable|numeric',
+            'graduate_year' => 'nullable|numeric',
+            'birth_date' => 'required|date',
+            'birth_place' => 'nullable|string',
+            'gender' => 'nullable|string',
+            'address' => 'nullable|string',
+            'phone_number' => 'nullable|digits_between:10,14',
+            'social_media' => 'nullable|string',
+            'organization' => 'nullable|string',
+            'achievement' => 'nullable|string',
+            'gpa' => 'nullable|numeric',
+            'diploma_number' => 'nullable|string',
+            'photo' => 'nullable|image:jpeg,png,jpg|max:5120',
+            'identity_card' => 'nullable|image:jpeg,png,jpg|max:5120',
+            'bachelor_certificate' => 'nullable|image:jpeg,png,jpg|max:5120',
         ]);
+
+        // Checking entry and graduate year
+        if ($request->graduate_year <= $request->entry_year) {
+            $response = [
+                'success' => false,
+                'code' => 422,
+                'message' => 'Tahun Lulus tidak boleh kurang dari Tahun Masuk!',
+            ];
+            return response()->json($response, 422);
+        }
 
         // run validation
         if ($validator->fails()) {
