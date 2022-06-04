@@ -49,8 +49,8 @@ class ProfileController extends Controller
             'nim' => 'required|string',
             'faculty_id' => 'required',
             'departement_id' => 'required',
-            'entry_year' => 'required|numeric',
-            'graduate_year' => 'required|numeric',
+            'entry_year' => 'nullable|date_format:Y',
+            'graduate_year' => 'nullable|date_format:Y|after:entry_year',
             'birth_date' => 'required|date',
             'birth_place' => 'required|string',
             'gender' => 'required|string',
@@ -65,16 +65,6 @@ class ProfileController extends Controller
             'identity_card' => 'nullable|image:jpeg,png,jpg|max:5120',
             'bachelor_certificate' => 'nullable|image:jpeg,png,jpg|max:5120'
         ]);
-
-        // Checking entry and graduate year
-        if ($request->graduate_year <= $request->entry_year) {
-            $response = [
-                'success' => false,
-                'code' => 422,
-                'message' => 'Tahun Lulus tidak boleh kurang dari Tahun Masuk!',
-            ];
-            return response()->json($response, 422);
-        }
 
         // run validation
         if ($validator->fails()) {

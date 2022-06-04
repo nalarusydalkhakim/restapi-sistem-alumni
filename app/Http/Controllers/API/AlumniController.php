@@ -63,8 +63,8 @@ class AlumniController extends Controller
             'nim' => 'required|string',
             'faculty_id' => 'nullable',
             'departement_id' => 'nullable',
-            'entry_year' => 'nullable|numeric',
-            'graduate_year' => 'nullable|numeric',
+            'entry_year' => 'nullable|date_format:Y',
+            'graduate_year' => 'nullable|date_format:Y|after:entry_year',
             'birth_date' => 'required|date',
             'birth_place' => 'nullable|string',
             'gender' => 'nullable|string',
@@ -80,16 +80,6 @@ class AlumniController extends Controller
             'bachelor_certificate' => 'nullable|image:jpeg,png,jpg|max:5120'
         ]);
 
-        // Checking entry and graduate year
-        if ($request->graduate_year <= $request->entry_year) {
-            $response = [
-                'success' => false,
-                'code' => 422,
-                'message' => 'Tahun Lulus tidak boleh kurang dari Tahun Masuk!',
-            ];
-            return response()->json($response, 422);
-        }
-
        // run validation
        if ($validator->fails()) {
         $response = [
@@ -99,7 +89,7 @@ class AlumniController extends Controller
             'errors' => $validator->errors()
         ];
         return response()->json($response, 422);
-    }
+        }
         
         try {
             $user = User::create([
@@ -195,8 +185,8 @@ class AlumniController extends Controller
             'nim' => 'required|string',
             'faculty_id' => 'nullable',
             'departement_id' => 'nullable',
-            'entry_year' => 'nullable|numeric',
-            'graduate_year' => 'nullable|numeric',
+            'entry_year' => 'nullable|date_format:Y',
+            'graduate_year' => 'nullable|date_format:Y|after:entry_year',
             'birth_date' => 'required|date',
             'birth_place' => 'nullable|string',
             'gender' => 'nullable|string',
@@ -211,16 +201,6 @@ class AlumniController extends Controller
             'identity_card' => 'nullable|image:jpeg,png,jpg|max:5120',
             'bachelor_certificate' => 'nullable|image:jpeg,png,jpg|max:5120',
         ]);
-
-        // Checking entry and graduate year
-        if ($request->graduate_year <= $request->entry_year) {
-            $response = [
-                'success' => false,
-                'code' => 422,
-                'message' => 'Tahun Lulus tidak boleh kurang dari Tahun Masuk!',
-            ];
-            return response()->json($response, 422);
-        }
 
         // run validation
         if ($validator->fails()) {

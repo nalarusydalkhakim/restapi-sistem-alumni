@@ -20,11 +20,8 @@ use App\Http\Controllers\API\TracerEntrepreneurController;
 use App\Http\Controllers\API\TracerNoWrokController;
 use App\Http\Controllers\API\TracerStudyController;
 use App\Http\Controllers\API\TracerWorkController;
-use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,17 +39,6 @@ use Maatwebsite\Excel\Facades\Excel;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/login_admin', [AuthController::class, 'loginAdmin']);
 Route::post('/register', [AuthController::class, 'register']);
-
-//Its For Alumni User but tami need this on public route :)
-// Code has been move
-
-
-
-// For admin site
-
-
-
-
 
 // protected routes
 Route::group(['middleware' => ['auth:sanctum']], function(){
@@ -127,8 +113,6 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::put('/departement/{id}', [DepartementController::class, 'update']);
         Route::delete('/departement/{id}', [DepartementController::class, 'destroy']);
     });
-    
-    
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
