@@ -58,11 +58,11 @@ class AlumniController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required|string',
-            'email' => 'required|string|email',
+            'email' => 'required|string|unique:users|email',
             'nik' => 'required|numeric',
             'nim' => 'required|string',
-            'faculty_id' => 'nullable',
-            'departement_id' => 'nullable',
+            'faculty_id' => 'nullable|exists:faculties,id',
+            'departement_id' => 'nullable|exists:faculties,id',
             'entry_year' => 'nullable|date_format:Y',
             'graduate_year' => 'nullable|date_format:Y|after:entry_year',
             'birth_date' => 'required|date',
@@ -183,8 +183,8 @@ class AlumniController extends Controller
             'email' => 'required|string|email',
             'nik' => 'required|numeric',
             'nim' => 'required|string',
-            'faculty_id' => 'nullable',
-            'departement_id' => 'nullable',
+            'faculty_id' => 'nullable|exists:faculties,id',
+            'departement_id' => 'nullable|exists:faculties,id',
             'entry_year' => 'nullable|date_format:Y',
             'graduate_year' => 'nullable|date_format:Y|after:entry_year',
             'birth_date' => 'required|date',
@@ -234,6 +234,12 @@ class AlumniController extends Controller
                 'diploma_number' => $request->diploma_number,
                 'organization' => $request->organization,
                 'achievement' => $request->achievement,
+                'photo' => $request->photo ?? $user->photo,
+                'photo_url' => $request->photo ? asset('storage/'.$request->photo) : $user->photo_url,
+                'identity_card' => $request->identity_card ?? $user->identity_card,
+                'identity_card_url' => $request->identity_card ? asset('storage/'.$request->identity_card) : $user->identity_card_url,
+                'bachelor_certificate' => $request->bachelor_certificate ?? $user->bachelor_certificat,
+                'bachelor_certificate_url' => $request->bachelor_certificate ? asset('storage/'.$request->bachelor_certificate) : $user->bachelor_certificate_url,
             ]);
             $response = [
                 'success' => true,
