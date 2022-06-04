@@ -59,7 +59,7 @@ class ProfileController extends Controller
             'social_media' => 'required|string',
             'organization' => 'required|string',
             'achievement' => 'required|string',
-            'gpa' => 'required|numeric',
+            'gpa' => 'required|numeric|min:0|max:4',
             'diploma_number' => 'required|string',
             'photo' => 'nullable|image:jpeg,png,jpg|max:5120',
             'identity_card' => 'nullable|image:jpeg,png,jpg|max:5120',
