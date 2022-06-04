@@ -137,7 +137,7 @@ class AuthController extends Controller
                             'user' => $user,
                             'token' => $token
                         ];
-                        return response()->json([$response, 200]);
+                        return response()->json($response, 200);
     
                     }else {
                         return response()->json([
@@ -202,7 +202,7 @@ class AuthController extends Controller
                          'user' => $user,
                          'token' => $token
                      ];
-                     return response()->json([$response, 200]);
+                     return response()->json($response, 200);
                 }else {
                     return response()->json([
                         'success' => false,
