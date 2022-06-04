@@ -158,6 +158,7 @@ class AlumniController extends Controller
     {
         $user = User::leftjoin('faculties', 'faculties.id', '=', 'users.faculty_id')
                         ->leftjoin('departements', 'departements.id', '=', 'users.departement_id')
+                        ->select('users.*', 'faculties.faculty_name', 'departements.departement_name')
                         ->findOrFail($id);
         $response = [
             'success' => true,
