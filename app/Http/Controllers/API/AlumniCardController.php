@@ -35,7 +35,7 @@ class AlumniCardController extends Controller
                         'no_member' => $user->nim,
                         'birth' => $user->birth_place.', '.date("d M Y", strtotime($user->birth_date)),
                         'fac_dep' => $user->faculty_name.' / '.$user->departement_name,
-                        'graduate_year' => date("d M Y", strtotime($user->graduate_year)),
+                        'graduate_year' => $user->graduate_year,
                         'expired_date' => date("d M Y", strtotime($tracer->expired_date)),
                         'photo' => $user->photo,
                     ];
