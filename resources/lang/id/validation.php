@@ -147,6 +147,7 @@ return [
 
     'attributes' => [
         // profile
+        'username' => 'Email/NIK',
         'name' => 'Nama',
         'email' => 'Email',
         'nik' => 'NIK',
