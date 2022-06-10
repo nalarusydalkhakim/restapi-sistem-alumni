@@ -79,15 +79,15 @@ class TracerWorkController extends Controller
     public function update(Request $request, $user_id)
     {
         $validator = Validator::make($request->all(),[
-            'company_name' => 'required|string',
-            'company_address' => 'required|string',
-            'company_sector' => 'required|string',
-            'position' => 'required|string',
-            'contract_status' => 'required|string',
+            'company_name' => 'required|string|max:255',
+            'company_address' => 'required|string|max:255',
+            'company_sector' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
+            'contract_status' => 'required|string|max:255',
             'salary' => 'required|numeric',
             'job_matches' => 'required',
-            'start_working' => 'required',
-            'get_job_from' => 'required|string',
+            'start_working' => 'required|date',
+            'get_job_from' => 'required|string|max:255',
         ]);
 
         // run validation

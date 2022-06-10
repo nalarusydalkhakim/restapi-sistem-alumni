@@ -79,14 +79,14 @@ class TracerEntrepreneurController extends Controller
     public function update(Request $request, $user_id)
     {
         $validator = Validator::make($request->all(),[
-            'business_name' => 'required|string',
-            'business_address' => 'required|string',
-            'business_sector' => 'required|string',
-            'business_phone' => 'required|numeric',
-            'establish_year' => 'required|numeric',
-            'capital_source' => 'required|string',
+            'business_name' => 'required|string|max:255',
+            'business_address' => 'required|string|max:255',
+            'business_sector' => 'required|string|max:255',
+            'business_phone' => 'required|digits_between:10,14',
+            'establish_year' => 'required|date_format:Y',
+            'capital_source' => 'required|string|max:255',
             'income' => 'required|numeric',
-            'business_matches' => 'required',
+            'business_matches' => 'required',//
         ]);
 
         // run validation

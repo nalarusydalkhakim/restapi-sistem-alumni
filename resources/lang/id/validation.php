@@ -172,7 +172,7 @@ return [
         // Tracer Study
         'university_name' => 'Nama Perguruan Tinggi',
         'university_address' => 'Alamat Perguruan Tinggi',
-        'study_location' => 'Lokasi Perguruan Tinggi',
+        'study_location' => 'Dalam atau Luar Negeri',
         'departement' => 'Bidang/Jurusan',
         'entry_year' => 'Tahun Masuk',
         'graduate_year' => 'Tahun Lulus',

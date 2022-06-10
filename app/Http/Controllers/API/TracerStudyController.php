@@ -65,13 +65,13 @@ class TracerStudyController extends Controller
     public function update(Request $request, $user_id)
     {
         $validator = Validator::make($request->all(),[
-            'university_name' => 'required|string',
-            'university_address' => 'required|string',
-            'study_location' => 'required|string',
-            'departement' => 'required|string',
-            'entry_year' => 'required|numeric',
-            'graduate_year' => 'required|numeric',
-            'study_matches' => 'required',
+            'university_name' => 'required|string|max:255',
+            'university_address' => 'required|string|max:255',
+            'study_location' => 'required|string|max:255',
+            'departement' => 'required|string|max:255',
+            'entry_year' => 'required|date_format:Y',
+            'graduate_year' => 'required|date_format:Y|after:entry_year',
+            'study_matches' => 'required',//
         ]);
 
         // run validation

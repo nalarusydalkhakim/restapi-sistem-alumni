@@ -58,7 +58,7 @@ class DepartementController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'faculty_id' => 'required|string',
-            'departement_name' => 'required|string',
+            'departement_name' => 'required|string|max:255',
         ]);
 
         // run validation
@@ -125,7 +125,7 @@ class DepartementController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'faculty_id' => 'required|string',
-            'departement_name' => 'required|string',
+            'departement_name' => 'required|string|max:255',
         ]);
 
         // run validation

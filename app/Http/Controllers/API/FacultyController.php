@@ -38,8 +38,8 @@ class FacultyController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'code' => 'required|string|unique:faculties',
-            'faculty_name' => 'required|string',
+            'code' => 'required|string|max:10|unique:faculties',
+            'faculty_name' => 'required|string|max:255',
         ]);
 
         // run validation
@@ -105,8 +105,8 @@ class FacultyController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(),[
-            'code' => 'required|string',
-            'faculty_name' => 'required|string',
+            'code' => 'required|string|max:10',
+            'faculty_name' => 'required|string|max:255',
         ]);
 
         // run validation

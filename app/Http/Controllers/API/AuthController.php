@@ -106,7 +106,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'username' => 'required',
+            'username' => 'required|string',
             'password' => 'required|min:8'
         ]);
 
@@ -143,7 +143,7 @@ class AuthController extends Controller
                         return response()->json([
                             'success' => false,
                             'code' => 403,
-                            'message' => 'Perhatian! Akun anda sedang proses validasi oleh Admin. Silahkan tunggu beberapa saat lagi!'
+                            'message' => 'Perhatian! Akun anda sedang dalam proses validasi oleh Admin. Silahkan tunggu beberapa saat lagi!'
                         ], 403);
                     }
                 }else {
