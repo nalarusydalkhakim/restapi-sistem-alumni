@@ -86,7 +86,7 @@ class TracerEntrepreneurController extends Controller
             'establish_year' => 'required|date_format:Y',
             'capital_source' => 'required|string|max:255',
             'income' => 'required|numeric',
-            'business_matches' => 'required',//
+            'business_matches' => 'required|boolean',
         ]);
 
         // run validation

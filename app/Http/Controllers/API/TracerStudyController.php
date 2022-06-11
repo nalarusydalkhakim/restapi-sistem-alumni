@@ -71,7 +71,7 @@ class TracerStudyController extends Controller
             'departement' => 'required|string|max:255',
             'entry_year' => 'required|date_format:Y',
             'graduate_year' => 'required|date_format:Y|after:entry_year',
-            'study_matches' => 'required',//
+            'study_matches' => 'required|boolean',
         ]);
 
         // run validation

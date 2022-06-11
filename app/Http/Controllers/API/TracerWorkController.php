@@ -85,7 +85,7 @@ class TracerWorkController extends Controller
             'position' => 'required|string|max:255',
             'contract_status' => 'required|string|max:255',
             'salary' => 'required|numeric',
-            'job_matches' => 'required',
+            'job_matches' => 'required|boolean',
             'start_working' => 'required|date',
             'get_job_from' => 'required|string|max:255',
         ]);
