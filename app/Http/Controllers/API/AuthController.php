@@ -121,7 +121,11 @@ class AuthController extends Controller
             return response()->json($response, 422);
         }
 
-        $user = User::where('email', $request->username)->orWhere('nik', $request->username)->first();
+        $user = User::where('email', $request->username)->orWhere('nik', $request->username)
+                    ->leftjoin('faculties', 'faculties.id', '=', 'users.faculty_id')
+                    ->leftjoin('departements', 'departements.id', '=', 'users.departement_id')
+                    ->select('users.*', 'faculties.faculty_name', 'departements.departement_name')
+                    ->first();
 
         if ($user) {
             if ($user->role == 'user') {
