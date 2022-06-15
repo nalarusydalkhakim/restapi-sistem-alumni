@@ -35,8 +35,8 @@ class UsersImport implements ToCollection, SkipsEmptyRows, WithHeadingRow, WithV
                 // 'password'          => $row['tanggal_lahir'],
                 // 'password'          => Carbon::createFromFormat('Y-m-d', $row['tanggal_lahir'])->format('d-m-Y'),
                 'password'          => Hash::make(Carbon::createFromFormat('Y-m-d', $row['tanggal_lahir'])->format('dmY')), //ex. from 1999-05-23 to 23051999
-                'faculty_id'        => $row['faculty_id'],
-                'departement_id'    => $row['departement_id'],
+                'faculty_id'        => $row['facultas_id'],
+                'departement_id'    => $row['jurusan_id'],
                 'entry_year'        => $row['tahun_masuk'],
                 'graduate_year'     => $row['tahun_lulus'],
                 'birth_date'        => $row['tanggal_lahir'],
