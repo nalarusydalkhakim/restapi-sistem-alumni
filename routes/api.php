@@ -20,6 +20,7 @@ use App\Http\Controllers\API\TracerEntrepreneurController;
 use App\Http\Controllers\API\TracerNoWrokController;
 use App\Http\Controllers\API\TracerStudyController;
 use App\Http\Controllers\API\TracerWorkController;
+use App\Http\Controllers\API\MigrateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -112,6 +113,9 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::get('/departement/{id}', [DepartementController::class, 'show']);
         Route::put('/departement/{id}', [DepartementController::class, 'update']);
         Route::delete('/departement/{id}', [DepartementController::class, 'destroy']);
+
+        //migration
+        Route::post('/migrate', [MigrateController::class, 'store']);
     });
 });
 
