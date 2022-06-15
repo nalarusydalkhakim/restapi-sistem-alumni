@@ -104,24 +104,24 @@ class UsersImport implements ToCollection, SkipsEmptyRows, WithHeadingRow, WithV
     public function rules(): array
     {
         return [
-            'nama' => 'required|string',
+            'nama' => 'required|string|max:255',
             'email' => 'required|unique:users|email',
             'nik' => 'required|unique:users',
-            'nim' => 'required|string|unique:users',
+            'nim' => 'required|string|max:255|unique:users',
             'tanggal_lahir' => 'required|date_format:Y-m-d',
-            'tempat_lahir' => 'nullable|string',
+            'tempat_lahir' => 'nullable|string|max:255',
             'jenis_kelamin' => 'nullable|in:Laki-Laki,Perempuan',
-            'faculty_id' => 'nullable',
-            'departement_id' => 'nullable',
+            'faculty_id' => 'nullable|exists:faculties,id',
+            'departement_id' => 'nullable|exists:departements,id',
             'alamat' => 'nullable|string',
-            'nomer_hp' => 'nullable|numeric',
-            'ipk' => 'nullable|numeric',
-            'nomor_ijazah' => 'nullable|string',
-            'sosmed' => 'nullable|string',
-            'organisasi' => 'nullable|string',
-            'prestasi' => 'nullable|string',
-            'tanggal_masuk' => 'nullable|date_format:Y-m-d',
-            'tanggal_keluar' => 'nullable|date_format:Y-m-d',
+            'nomer_hp' => 'nullable||digits_between:10,14',
+            'ipk' => 'nullable|numeric|min:0|max:4',
+            'nomor_ijazah' => 'nullable|string|max:255',
+            'sosmed' => 'nullable|string|max:255',
+            'organisasi' => 'nullable|string|max:255',
+            'prestasi' => 'nullable|string|max:255',
+            'tanggal_masuk' => 'nullable|date_format:Y',
+            'tanggal_keluar' => 'nullable|date_format:Y|after:tanggal_masuk',
         ];
     }
 
