@@ -70,7 +70,7 @@
             <td height="20px"></td>
         </tr>
         <tr>
-            <td class="front">Kadarluasa</td>
+            <td class="front">Kedaluwarsa</td>
             <td>:</td>
             <td>{{ $expired_date }}</td>
         </tr>
@@ -78,7 +78,7 @@
             <td height="10px"></td>
         </tr>
         <tr>
-            <td colspan="3" style="font-size: 6px;">ISI TRACER STUDY KEMBALI UNTUK MEMPERBARUI MASA KADARLUASA</td>
+            <td colspan="3" style="font-size: 6px;">ISI TRACER STUDY KEMBALI UNTUK MEMPERBARUI MASA KEDALUWARSA</td>
         </tr>
         <tr>
             <td colspan="3"><div>{!! DNS1D::getBarcodeHTML($nik, 'C128') !!}</div></td>
