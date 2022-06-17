@@ -52,7 +52,7 @@
             <td>{{ $no_member }}</td>
         </tr>
         <tr>
-            <td class="front">TTL</td>
+            <td class="front">Tempat & Tanggal Lahir</td>
             <td>:</td>
             <td>{{ $birth }}</td>
         </tr>

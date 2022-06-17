@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 // use Barryvdh\DomPDF\PDF;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class AlumniCardController extends Controller
 {
@@ -33,10 +34,10 @@ class AlumniCardController extends Controller
                         'name' => $user->name,
                         'nik' => $user->nik,
                         'no_member' => $user->nim,
-                        'birth' => $user->birth_place.', '.date("d M Y", strtotime($user->birth_date)),
+                        'birth' => $user->birth_place.', '.Carbon::createFromFormat('Y-m-d', $user->birth_date)->isoFormat('D MMMM Y'),
                         'fac_dep' => $user->faculty_name.' / '.$user->departement_name,
                         'graduate_year' => $user->graduate_year,
-                        'expired_date' => date("d M Y", strtotime($tracer->expired_date)),
+                        'expired_date' => Carbon::createFromFormat('Y-m-d', $tracer->expired_date)->isoFormat('D MMMM Y'),
                         'photo' => $user->photo,
                     ];
             
