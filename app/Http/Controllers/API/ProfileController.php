@@ -23,6 +23,15 @@ class ProfileController extends Controller
                         ->leftjoin('departements', 'departements.id', '=', 'users.departement_id')
                         ->select('users.*', 'faculties.faculty_name', 'departements.departement_name')
                         ->findOrFail($id);
+
+        if (auth()->user()->cannot('update', $user)) {
+            return response([
+                'success' => false,
+                'code' => 403,
+                'message' => 'Anda tidak diizinkan mengakses halaman ini',
+            ], 403);
+        }
+
         $response = [
             'success' => true,
             'code' => 200,
@@ -44,9 +53,9 @@ class ProfileController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255|email',
-            'nik' => 'required|numeric',
-            'nim' => 'required|string|max:255',
+            'email' => 'required|string|max:255|email|unique:users,email,'.$id,
+            'nik' => 'required|numeric|unique:users,nik,'.$id,
+            'nim' => 'required|string|max:255|unique:users,nim,'.$id,
             'faculty_id' => 'required|exists:faculties,id',
             'departement_id' => 'required|exists:departements,id',
             'entry_year' => 'required|date_format:Y',
@@ -76,6 +85,16 @@ class ProfileController extends Controller
             ];
             return response()->json($response, 422);
         }
+        
+        $user = User::findOrFail($id);
+
+        if (auth()->user()->cannot('update', $user)) {
+            return response([
+                'success' => false,
+                'code' => 403,
+                'message' => 'Anda tidak diizinkan mengakses halaman ini',
+            ], 403);
+        }
 
         if ($request->file('photo')) {
             $photo_path = $request->file('photo')->store('uploads/foto');
@@ -91,8 +110,6 @@ class ProfileController extends Controller
             $bachelor_certificate_path = $request->file('bachelor_certificate')->store('uploads/ijazah');
             $request->bachelor_certificate = $bachelor_certificate_path;
         }
-        
-        $user = User::findOrFail($id);
 
         try {
             
@@ -151,6 +168,15 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+
+        if (auth()->user()->cannot('update', $user)) {
+            return response([
+                'success' => false,
+                'code' => 403,
+                'message' => 'Anda tidak diizinkan mengakses halaman ini',
+            ], 403);
+        }
+        
         try {
             $user->delete();
             $response = [
