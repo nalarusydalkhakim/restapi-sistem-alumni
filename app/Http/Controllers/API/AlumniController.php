@@ -181,9 +181,9 @@ class AlumniController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255|email',
-            'nik' => 'required|numeric',
-            'nim' => 'required|string|max:255',
+            'email' => 'required|string|max:255|email|unique:users,email,'.$id,
+            'nik' => 'required|numeric|unique:users,nik,'.$id,
+            'nim' => 'required|string|max:255|unique:users,nim,'.$id,
             'faculty_id' => 'nullable|exists:faculties,id',
             'departement_id' => 'nullable|exists:faculties,id',
             'entry_year' => 'nullable|date_format:Y',
