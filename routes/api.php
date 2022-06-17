@@ -4,12 +4,12 @@
 // use App\Http\Controllers\API\Alumni\AuthController;
 // use App\Http\Controllers\API\Alumni\TracerStudyController;
 // use App\Http\Controllers\API\Alumni\ProfileController;
-// use App\Http\Controllers\API\Alumni\CVCOntroller;
+// use App\Http\Controllers\API\Alumni\CVController;
 
 use App\Http\Controllers\API\AlumniCardController;
 use App\Http\Controllers\API\AlumniController;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\CVCOntroller;
+use App\Http\Controllers\API\CVController;
 use App\Http\Controllers\API\DashboardAdminController;
 use App\Http\Controllers\API\DashboardAlumniController;
 use App\Http\Controllers\API\DepartementController;
@@ -81,7 +81,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         // Tracer No Work
         Route::post('/no_work/{id}', [TracerNoWrokController::class, 'noWork']);
         // Generate CV for Alumni
-        Route::get('/cv/{id}', [CVCOntroller::class, 'show']);
+        Route::get('/cv/{id}', [CVController::class, 'show']);
         // Generate Alumni Card
         Route::get('/card/{id}', [AlumniCardController::class, 'generateAlumniCard']);
     });

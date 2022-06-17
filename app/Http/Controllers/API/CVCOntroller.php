@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class CVCOntroller extends Controller
+class CVController extends Controller
 {
 
     /**
