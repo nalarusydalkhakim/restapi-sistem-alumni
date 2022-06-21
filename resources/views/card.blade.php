@@ -31,7 +31,7 @@
     </style>
 </head>
 {{-- 342px 429px ktp size --}}
-<body style="background-image: url({{ public_path("storage/image/kartu_update_1.png") }});background-size: 100% ;background-repeat: no-repeat;">
+<body style="background-image: url({{ public_path("storage/image/kartu_update_2.png") }});background-size: 100% ;background-repeat: no-repeat;">
     <table width="98%" style="padding: 170px 5px 5px 5px;">
         <tr>
             <td width="20%" class="front">Nama</td>
