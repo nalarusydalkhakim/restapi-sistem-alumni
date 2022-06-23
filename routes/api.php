@@ -43,8 +43,6 @@ Route::post('/login_admin', [AuthController::class, 'loginAdmin']);
 Route::post('/register', [AuthController::class, 'register']);
 
 
-Route::get('/export_tracer', [AlumniController::class, 'tracerExport']);
-
 // protected routes
 Route::group(['middleware' => ['auth:sanctum']], function(){
     
@@ -110,6 +108,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::get('/template', [AlumniController::class, 'downloadTemplate']);
         Route::post('/import', [AlumniController::class, 'alumniImport']);
         Route::get('/export_alumni', [AlumniController::class, 'alumniExport']);
+        Route::get('/export_tracer', [AlumniController::class, 'tracerExport']);
         // validate alumni by admin endpoint
         Route::put('/validate/{id}', [AlumniController::class, 'setValidate']);
         Route::put('/unvalidate/{id}', [AlumniController::class, 'unValidate']);
