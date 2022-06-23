@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Exports\AlumniExport;
+use App\Exports\TracerExport;
 use App\Http\Controllers\Controller;
 use App\Imports\UsersImport;
 use App\Models\TracerEntrepreneur;
@@ -362,6 +363,11 @@ class AlumniController extends Controller
     public function alumniExport()
     {
         return Excel::download(new AlumniExport, 'alumni.xlsx');
+    }
+
+    public function tracerExport()
+    {
+        return Excel::download(new TracerExport, 'tracer_alumni.xlsx');
     }
 
     public function downloadTemplate()

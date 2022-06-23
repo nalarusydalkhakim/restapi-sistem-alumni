@@ -42,6 +42,9 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/login_admin', [AuthController::class, 'loginAdmin']);
 Route::post('/register', [AuthController::class, 'register']);
 
+
+Route::get('/export_tracer', [AlumniController::class, 'tracerExport']);
+
 // protected routes
 Route::group(['middleware' => ['auth:sanctum']], function(){
     
@@ -104,9 +107,9 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
         Route::put('/alumni/{id}', [AlumniController::class, 'update']);
         Route::delete('/alumni/{id}', [AlumniController::class, 'destroy']);
         // Import Alumni from Excel
-        Route::post('/import', [AlumniController::class, 'alumniImport']);
-        Route::get('/export', [AlumniController::class, 'alumniExport']);
         Route::get('/template', [AlumniController::class, 'downloadTemplate']);
+        Route::post('/import', [AlumniController::class, 'alumniImport']);
+        Route::get('/export_alumni', [AlumniController::class, 'alumniExport']);
         // validate alumni by admin endpoint
         Route::put('/validate/{id}', [AlumniController::class, 'setValidate']);
         Route::put('/unvalidate/{id}', [AlumniController::class, 'unValidate']);
