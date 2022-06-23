@@ -16,7 +16,7 @@ class AlumniExport implements FromCollection, WithHeadings
         return User::leftjoin('faculties', 'faculties.id', '=', 'users.faculty_id')
                     ->leftjoin('departements', 'departements.id', '=', 'users.departement_id')
                     ->select('name', 'email', 'nik', 'nim', 'faculties.faculty_name', 'departements.departement_name', 
-                            'entry_year', 'graduate_year', 'birth_date', 'birth_place', 'gender', 'address', 'phone_number',
+                            'entry_year', 'graduate_year', 'birth_date', 'birth_place', 'gender','country', 'province', 'regency', 'district', 'address', 'phone_number',
                             'social_media', 'gpa', 'diploma_number', 'organization', 'achievement', 'completed', 'validated')
                     ->where('role', 'user')
                     ->get();
@@ -36,6 +36,10 @@ class AlumniExport implements FromCollection, WithHeadings
             'tanggal lahir',
             'tempat lahir',
             'jenis kelamin',
+            'negara',
+            'provinsi',
+            'kabupaten',
+            'kecamatan',
             'alamat',
             'nomor handphone',
             'sosial media',

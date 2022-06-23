@@ -21,6 +21,7 @@ use App\Http\Controllers\API\TracerNoWrokController;
 use App\Http\Controllers\API\TracerStudyController;
 use App\Http\Controllers\API\TracerWorkController;
 use App\Http\Controllers\API\MigrateController;
+use App\Http\Controllers\API\RegionalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,12 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     // untuk sementara
     Route::get('/faculty', [FacultyController::class, 'index']);
     Route::get('/departement', [DepartementController::class, 'index']);
+
+    // Regional
+    Route::get('/country', [RegionalController::class, 'country']);
+    Route::get('/province', [RegionalController::class, 'province']);
+    Route::get('/regency/{id}', [RegionalController::class, 'regency']);
+    Route::get('/district/{id}', [RegionalController::class, 'district']);
 
 
     // For user alumni
