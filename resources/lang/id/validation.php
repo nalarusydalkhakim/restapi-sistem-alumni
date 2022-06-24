@@ -196,5 +196,8 @@ return [
         'capital_source' => 'Sumber Permodalan',
         'income' => 'Estimasi Pendapatan',
         'business_matches' => 'Kesesuaian Usaha dengan Jurusan',
+        'code' => 'Kode',
+        'faculty_name' => 'Nama Fakultas',
+        'departement_name' => 'Nama Jurusan'
     ],
 ];
