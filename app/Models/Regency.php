@@ -9,7 +9,7 @@
 
 namespace App\Models;
 
-use AzisHapidin\IndoRegion\Traits\RegencyTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Regency extends Model
 {
-    use RegencyTrait;
+    use HasFactory;
 
     /**
      * Table name.

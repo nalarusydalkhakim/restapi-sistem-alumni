@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
             FacultySeeder::class,
             DepartementSeeder::class,
             CountrySeeder::class,
+            ProvinceSeeder::class,
+            RegencySeeder::class,
+            DistrictSeeder::class,
         ]);
     }
 }

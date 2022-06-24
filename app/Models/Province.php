@@ -10,6 +10,7 @@
 namespace App\Models;
 
 use AzisHapidin\IndoRegion\Traits\ProvinceTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Province extends Model
 {
-    use ProvinceTrait;
+    use HasFactory;
     /**
      * Table name.
      *
@@ -30,8 +31,8 @@ class Province extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function regencies()
-    {
-        return $this->hasMany(Regency::class);
-    }
+    // public function regencies()
+    // {
+    //     return $this->hasMany(Regency::class);
+    // }
 }

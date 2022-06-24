@@ -9,17 +9,17 @@
 
 namespace App\Models;
 
-use AzisHapidin\IndoRegion\Traits\DistrictTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Regency;
 use App\Models\Village;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * District Model.
  */
 class District extends Model
 {
-    use DistrictTrait;
+    use HasFactory;
 
     /**
      * Table name.

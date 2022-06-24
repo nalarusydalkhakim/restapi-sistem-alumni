@@ -51,6 +51,9 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Get User By id
+        $user = User::findOrFail($id);
+
         $validator = Validator::make($request->all(),[
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255|email|unique:users,email,'.$id,
@@ -74,10 +77,20 @@ class ProfileController extends Controller
             'achievement' => 'nullable|string|max:255',
             'gpa' => 'required|numeric|min:0|max:4',
             'diploma_number' => 'required|string|max:255',
-            'photo' => 'nullable|image:jpeg,png,jpg|max:5120',
+            // 'photo' => 'nullable`|image:jpeg,png,jpg|max:5120',
             'identity_card' => 'nullable|image:jpeg,png,jpg|max:5120',
             'bachelor_certificate' => 'nullable|image:jpeg,png,jpg|max:5120'
         ]);
+
+        if (!$user->photo) {
+            $validator = Validator::make($request->all(),[
+                'photo' => 'required|image:jpeg,png,jpg|max:5120',
+            ]);
+        }else {
+            $validator = Validator::make($request->all(),[
+                'photo' => 'nullable|image:jpeg,png,jpg|max:5120',
+            ]);
+        }
 
         // run validation
         if ($validator->fails()) {
@@ -89,8 +102,6 @@ class ProfileController extends Controller
             ];
             return response()->json($response, 422);
         }
-        
-        $user = User::findOrFail($id);
 
         if (auth()->user()->cannot('update', $user)) {
             return response([
