@@ -193,24 +193,24 @@ class AlumniController extends Controller
             'email' => 'required|string|max:255|email|unique:users,email,'.$id,
             'nik' => 'required|numeric|unique:users,nik,'.$id,
             'nim' => 'required|string|max:255|unique:users,nim,'.$id,
-            'faculty_id' => 'nullable|exists:faculties,id',
-            'departement_id' => 'nullable|exists:faculties,id',
-            'entry_year' => 'nullable|date_format:Y',
-            'graduate_year' => 'nullable|date_format:Y|after:entry_year',
+            'faculty_id' => 'required|exists:faculties,id',
+            'departement_id' => 'required|exists:faculties,id',
+            'entry_year' => 'required|date_format:Y',
+            'graduate_year' => 'required|date_format:Y|after:entry_year',
             'birth_date' => 'required|date',
-            'birth_place' => 'nullable|string|max:255',
-            'gender' => 'nullable|string|max:255',
+            'birth_place' => 'required|string|max:255',
+            'gender' => 'required|string|max:255',
             'country' => 'required|string|max:255',
             'province' => 'exclude_unless:country,Indonesia|required|string|max:255',
             'regency' => 'exclude_unless:country,Indonesia|required|string|max:255',
             'district' => 'exclude_unless:country,Indonesia|required|string|max:255',
-            'address' => 'nullable|string|max:255',
-            'phone_number' => 'nullable|digits_between:10,14',
+            'address' => 'required|string|max:255',
+            'phone_number' => 'required|digits_between:10,14',
             'social_media' => 'nullable|string|max:255',
             'organization' => 'nullable|string|max:255',
             'achievement' => 'nullable|string|max:255',
             'gpa' => 'required|numeric|min:0|max:4',
-            'diploma_number' => 'nullable|string|max:255',
+            'diploma_number' => 'required|string|max:255',
             'photo' => 'nullable|image:jpeg,png,jpg|max:5120',
             'identity_card' => 'nullable|image:jpeg,png,jpg|max:5120',
             'bachelor_certificate' => 'nullable|image:jpeg,png,jpg|max:5120',
@@ -225,6 +225,21 @@ class AlumniController extends Controller
                 'errors' => $validator->errors()
             ];
             return response()->json($response, 422);
+        }
+
+        if ($request->file('photo')) {
+            $photo_path = $request->file('photo')->store('uploads/foto');
+            $request->photo = $photo_path;
+        }
+
+        if ($request->file('identity_card')) {
+            $identity_card_path = $request->file('identity_card')->store('uploads/ktp');
+            $request->identity_card = $identity_card_path;
+        }
+
+        if ($request->file('bachelor_certificate')) {
+            $bachelor_certificate_path = $request->file('bachelor_certificate')->store('uploads/ijazah');
+            $request->bachelor_certificate = $bachelor_certificate_path;
         }
 
         $user = User::findOrFail($id);
