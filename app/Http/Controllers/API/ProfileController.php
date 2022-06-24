@@ -54,7 +54,7 @@ class ProfileController extends Controller
         // Get User By id
         $user = User::findOrFail($id);
 
-        $validator = Validator::make($request->all(),[
+        $rules = [
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255|email|unique:users,email,'.$id,
             'nik' => 'required|numeric|unique:users,nik,'.$id,
@@ -77,22 +77,26 @@ class ProfileController extends Controller
             'achievement' => 'nullable|string|max:255',
             'gpa' => 'required|numeric|min:0|max:4',
             'diploma_number' => 'required|string|max:255',
-            // 'photo' => 'nullable`|image:jpeg,png,jpg|max:5120',
+            'photo' => 'nullable`|image:jpeg,png,jpg|max:5120',
             'identity_card' => 'nullable|image:jpeg,png,jpg|max:5120',
             'bachelor_certificate' => 'nullable|image:jpeg,png,jpg|max:5120'
-        ]);
+        ];
 
         if (!$user->photo) {
-            $validator = Validator::make($request->all(),[
-                'photo' => 'required|image:jpeg,png,jpg|max:5120',
-            ]);
-        }else {
-            $validator = Validator::make($request->all(),[
-                'photo' => 'nullable|image:jpeg,png,jpg|max:5120',
-            ]);
+            $rules['photo'] = 'required|image:jpeg,png,jpg|max:5120';
+        }
+
+        if (!$user->identity_card) {
+            $rules['identity_card'] = 'required|image:jpeg,png,jpg|max:5120';
+        }
+
+        if (!$user->bachelor_certificate) {
+            $rules['bachelor_certificate'] = 'required|image:jpeg,png,jpg|max:5120';
         }
 
         // run validation
+        $validator = Validator::make($request->all(),$rules);
+
         if ($validator->fails()) {
             $response = [
                 'success' => false,
