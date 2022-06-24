@@ -159,7 +159,7 @@ class ProfileController extends Controller
                 'photo_url' => $request->photo ? asset('storage/'.$request->photo) : $user->photo_url,
                 'identity_card' => $request->identity_card ?? $user->identity_card,
                 'identity_card_url' => $request->identity_card ? asset('storage/'.$request->identity_card) : $user->identity_card_url,
-                'bachelor_certificate' => $request->bachelor_certificate ?? $user->bachelor_certificat,
+                'bachelor_certificate' => $request->bachelor_certificate ?? $user->bachelor_certificate,
                 'bachelor_certificate_url' => $request->bachelor_certificate ? asset('storage/'.$request->bachelor_certificate) : $user->bachelor_certificate_url,
                 'first' => 0,
                 'completed' => 1,
