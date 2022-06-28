@@ -25,10 +25,10 @@ class DashboardAlumniController extends Controller
         $tracer =  TracerUpdateHistory::where('user_id', $user_id )->orderBy('expired_date', 'DESC')->first();
 
         if ($tracer) {
-            $expired_date = $tracer->expired_date;
+            $last_update = $tracer->update_date;
             $tracer_completed = 1;
         }else{
-            $expired_date = null;
+            $last_update = null;
             $tracer_completed = 0;
         }
 
@@ -39,7 +39,7 @@ class DashboardAlumniController extends Controller
             'profile_completed' => $user->completed,
             'profile_validated' => $user->validated,
             'tracer_completed' => $tracer_completed,
-            'expired_date' => $expired_date
+            'last_update' => $last_update
         ];
 
         return response($response, 200);
