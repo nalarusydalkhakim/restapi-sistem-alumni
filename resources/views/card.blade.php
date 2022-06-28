@@ -31,7 +31,7 @@
     </style>
 </head>
 {{-- 342px 429px ktp size --}}
-<body style="background-image: url({{ public_path("storage/image/kartu_update_2.png") }});background-size: 100% ;background-repeat: no-repeat;">
+<body style="background-image: url({{ public_path("storage/image/kartu_update_3.png") }});background-size: 100% ;background-repeat: no-repeat;">
     <table width="98%" style="padding: 170px 5px 5px 5px;">
         <tr>
             <td width="20%" class="front">Nama</td>
@@ -69,16 +69,16 @@
         <tr>
             <td height="20px"></td>
         </tr>
-        <tr>
+        {{-- <tr>
             <td class="front">Kedaluwarsa</td>
             <td>:</td>
             <td>{{ $expired_date }}</td>
-        </tr>
+        </tr> --}}
         <tr>
             <td height="10px"></td>
         </tr>
         <tr>
-            <td colspan="3" style="font-size: 6px;">ISI TRACER STUDY KEMBALI UNTUK MEMPERBARUI MASA KEDALUWARSA</td>
+            <td colspan="3" style="font-size: 9px;">UPDATE BIODATA RUTIN SECARA ONLINE MELALUI AKUN DIGITAL MASING-MASING.</td>
         </tr>
         <tr>
             <td colspan="3"><div>{!! DNS1D::getBarcodeHTML($nik, 'C128') !!}</div></td>
