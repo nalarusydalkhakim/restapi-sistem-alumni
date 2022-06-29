@@ -23,7 +23,7 @@ class AlumniCardController extends Controller
         $user = User::leftjoin('faculties', 'faculties.id', '=', 'users.faculty_id')
                         ->leftjoin('departements', 'departements.id', '=', 'users.departement_id')
                         ->findOrFail($user_id);
-        $tracer = TracerUpdateHistory::where('user_id', $user_id )->orderBy('expired_date', 'DESC')->first();
+        // $tracer = TracerUpdateHistory::where('user_id', $user_id )->orderBy('expired_date', 'DESC')->first();
         
         if ($user->completed) {
             if ($user->validated) {
@@ -36,7 +36,7 @@ class AlumniCardController extends Controller
                     'birth' => $user->birth_place.', '.Carbon::createFromFormat('Y-m-d', $user->birth_date)->isoFormat('D MMMM Y'),
                     'fac_dep' => $user->faculty_name.' / '.$user->departement_name,
                     'graduate_year' => $user->graduate_year,
-                    'expired_date' => Carbon::createFromFormat('Y-m-d', $tracer->expired_date)->isoFormat('D MMMM Y'),
+                    // 'expired_date' => Carbon::createFromFormat('Y-m-d', $tracer->expired_date)->isoFormat('D MMMM Y'),
                     'photo' => $user->photo,
                 ];
         
