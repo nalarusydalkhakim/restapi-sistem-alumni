@@ -109,7 +109,7 @@ class UsersImport implements ToCollection, SkipsEmptyRows, WithHeadingRow, WithV
     {
         return [
             'nama' => 'required|string|max:255',
-            'email' => 'nullable|unique:users|email',
+            'email' => 'nullable|email|max:255',
             'nik' => 'required|unique:users',
             'nim' => 'required|string|max:255|unique:users',
             'tanggal_lahir' => 'required|date_format:Y-m-d',
